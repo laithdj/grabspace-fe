@@ -1,0 +1,380 @@
+<!--=====================================-->
+<!--=   Breadcrumb     Start            =-->
+<!--=====================================-->
+
+<div class="breadcrumb-wrap no-print">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item">
+          <a routerLink="/properties">Properties</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          {{details.title}}
+        </li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!--=====================================-->
+<!--=   Single Listing     Start        =-->
+<!--=====================================-->
+
+<section class="single-listing-wrap1">
+  <div class="container">
+    <div class="single-property">
+      <div class="content-wrapper">
+        <div class="property-heading">
+          <div class="row">
+            <!-- <div class="col-lg-6 col-md-12">
+              <div class="single-list-cate">
+                <div class="item-categoery">{{details.propertyStatus?.status}}</div>
+              </div>
+            </div> -->
+            <div class="col-lg-12 col-md-12 justify-content-end">
+              <div class="single-list-price">
+                <ng-container *ngIf="details.hideSalePrice"> <span style="font-size: 20px;">For price: Contact Agent</span></ng-container>
+                <ng-container *ngIf="!details.hideSalePrice">${{details.salePrice}}</ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-lg-8 col-md-12">
+              <div class="single-verified-area">
+                <div class="item-title">
+                  <h3>
+                    <a href="javascript:;">{{details.title}}</a>
+                  </h3>
+                </div>
+              </div>
+              <div class="single-item-address">
+                <ul>
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i>{{details.address}} /
+                  </li>
+                  <li class="no-print"><i class="fas fa-clock"></i>{{details.timeLong}} /</li>
+                  <!-- <li><i class="fas fa-eye"></i>Views: 1,230</li> -->
+                  <li class="no-print"><i class="fas fa-eye"></i>Views: {{details.userView}}</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12 no-print">
+              <div class="side-button">
+                <ul>
+                  <li>
+                    <!-- <a routerLink="/properties/1" class="side-btn"><i class="flaticon-share"></i></a> -->
+                    <a href="javascript:;" (click)="!csvLoading && onDownloadCSV()" class="side-btn" [ngClass]="{'is-loading': csvLoading}">
+                      <i class="fas fa-download" *ngIf="!csvLoading"></i>
+                      <i class="fas fa-spinner fa-spin" *ngIf="csvLoading"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:;" (click)="onPrintPage()" class="side-btn"><i class="flaticon-printer"></i></a>
+                  </li>
+                  <!-- <li>
+                    <a routerLink="/properties/1" class="side-btn"><i class="flaticon-heart"></i></a>
+                  </li>
+                  <li>
+                    <a routerLink="/properties/1" class="side-btn"><i class="flaticon-left-and-right-arrows"></i></a>
+                  </li> -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="featured-thumb-slider-area wow fadeInUp no-print" data-wow-delay=".4s">
+              <div class="feature-box3 swiper-container">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide" *ngFor="let imageValue of details.images">
+                    <div class="feature-img1 zoom-image-hover">
+                      <img [src]="backendurl + '/' + imageValue.path" alt="feature" width="798" height="420" />
+                    </div>
+                  </div>
+                  <!-- <div class="swiper-slide">
+                    <div class="feature-img1 zoom-image-hover">
+                      <img src="/assets/img/blog/product3.jpg" alt="feature" width="798" height="420" />
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="feature-img1 zoom-image-hover">
+                      <img src="/assets/img/blog/product4.jpg" alt="feature" width="798" height="420" />
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="feature-img1 zoom-image-hover">
+                      <img src="/assets/img/blog/product5.jpg" alt="feature" width="798" height="420" />
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="feature-img1 zoom-image-hover">
+                      <img src="/assets/img/blog/product6.jpg" alt="feature" width="798" height="420" />
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+              <div class="featured-thum-slider2 swiper-container">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide" *ngFor="let imageValue of details.images">
+                    <div class="item-img">
+                      <img [src]="backendurl + '/' + imageValue.path" alt="feature" width="154" height="100" />
+                    </div>
+                  </div>
+                  <!-- <div class="swiper-slide">
+                    <div class="item-img">
+                      <img src="/assets/img/blog/product7.jpg" alt="feature" width="154" height="100" />
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="item-img">
+                      <img src="/assets/img/blog/product8.jpg" alt="feature" width="154" height="100" />
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="item-img">
+                      <img src="/assets/img/blog/product9.jpg" alt="feature" width="154" height="100" />
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="item-img">
+                      <img src="/assets/img/blog/product10.jpg" alt="feature" width="154" height="100" />
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <div class="single-listing-box1">
+              <div class="overview-area">
+                <h3 class="item-title">Overview</h3>
+                <div class="gallery-icon-box">
+                  <div class="item-icon-box">
+                    <div class="item-icon">
+                      <i class="flaticon-home"></i>
+                    </div>
+                    <ul class="item-number">
+                      <li>Type :</li>
+                      <li class="deep-clr">{{details.propertyType?.type}}</li>
+                    </ul>
+                  </div>
+                  <div class="item-icon-box">
+                    <div class="item-icon">
+                      <i class="flaticon-bed"></i>
+                    </div>
+                    <ul class="item-number">
+                      <li>Bed Room :</li>
+                      <li class="deep-clr">{{details.bedrooms}}</li>
+                    </ul>
+                  </div>
+                  <div class="item-icon-box">
+                    <div class="item-icon">
+                      <i class="flaticon-home"></i>
+                    </div>
+                    <ul class="item-number">
+                      <li>Area :</li>
+                      <li class="deep-clr">{{details.area}} sqft</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="gallery-icon-box">     
+                  <div class="item-icon-box">
+                    <div class="item-icon">
+                      <i class="flaticon-home"></i>
+                    </div>
+                    <ul class="item-number">
+                      <li>Parking :</li>
+                      <li class="deep-clr">{{details.parkingAvailable ? 'Yes' : 'No'}}</li>
+                    </ul>
+                  </div>             
+                  <div class="item-icon-box">
+                    <div class="item-icon">
+                      <i class="flaticon-pencil"></i>
+                    </div>
+                    <ul class="item-number">
+                      <li>Land Size :</li>
+                      <li class="deep-clr">{{details.landSize}} sqft</li>
+                    </ul>
+                  </div>
+                  <div class="item-icon-box">
+                    <div class="item-icon">
+                      <i class="flaticon-two-overlapping-square"></i>
+                    </div>
+                    <ul class="item-number">
+                      <li>Age :</li>
+                      <li class="deep-clr">{{details.propertyAge}}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="overview-area listing-area mt-3">
+                <h3 class="item-title">About</h3>
+                <p>
+                  {{details.description}}
+                </p>
+              </div>
+              <div class="overview-area single-details-box table-responsive mt-3">
+                <h3 class="item-title">Details</h3>
+                <table class="table-box1">
+                  <tr>
+                    <td class="item-bold">Property Type</td>
+                    <td>{{details.propertyType?.type}}</td>
+                    <td class="item-bold">Price</td>
+                    <td>
+                      <ng-container *ngIf="details.hideSalePrice">Contact Agent</ng-container>
+                      <ng-container *ngIf="!details.hideSalePrice">${{details.salePrice}}</ng-container>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="item-bold">Rooms</td>
+                    <td>{{details.bedrooms}}</td>
+                    <td class="item-bold">Bathrooms</td>
+                    <td>{{details.bathrooms}}</td>
+                  </tr>
+                  <tr>
+                    <td class="item-bold">Land Area</td>
+                    <td>{{details.area}} sqft</td>
+                    <td class="item-bold">Size</td>
+                    <td>{{details.landSize}} sqft</td>
+                  </tr>
+                  <tr>
+                    <td class="item-bold">Parking</td>
+                    <td>{{details.parkingAvailable ? 'Yes' : 'No'}}</td>
+                    <td class="item-bold">Age</td>
+                    <td>{{details.propertyAge}}</td>
+                  </tr>
+                  <tr>
+                    <td class="item-bold">Currently Tenanted?</td>
+                    <td>{{details.currentlyTenanted ? 'Yes' : 'No'}}</td>
+                    <td class="item-bold">Land DA Approved?</td>
+                    <td>{{details.landDAApproved ? 'Yes' : 'No'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="item-bold">Flood Zone?</td>
+                    <td>{{details.floodZone ? 'Yes' : 'No'}}</td>
+                    <td class="item-bold">Fire Zone?</td>
+                    <td>{{details.fireZone ? 'Yes' : 'No'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="item-bold">Is Body Corporate?</td>
+                    <td>{{details.isBodyCorporate ? 'Yes' : 'No'}}</td>
+                    <td class="item-bold">Body Corporate Value</td>
+                    <td>{{details.isBodyCorporate && details.bodyCorporateValue ? details.bodyCorporateValue : '-'}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="overview-area ameniting-box mt-3">
+                <h3 class="item-title">Features & Amenities</h3>
+                <div class="row">
+                  <div class="col-lg-3" *ngFor="let amenityValue of details.amenities">
+                    <ul class="ameniting-list">
+                      <li >
+                        <i class="fas fa-check-circle"></i>{{amenityValue.name}}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="overview-area floor-plan-box mt-3" *ngIf="details.floorPlans?.length">
+                <h3 class="item-title">Floor Plans</h3>
+                <div id="accordion" class="accordion">
+                  <div class="card" *ngFor="let floorValue of details.floorPlans">
+                    <div class="card-header">
+                      <div class="heading-title" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="true" role="button">
+                        <span>{{floorValue.title}}</span>
+                      </div>
+                    </div>
+                    <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                      <div class="card-body">
+                        <div class="item-img">
+                          <img [src]="backendurl + '/' + floorValue.path" alt="shape" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 widget-break-lg sidebar-widget">
+            <div class="widget widget-contact-box">
+              <h3 class="widget-subtitle">Contact</h3>
+              <div class="media d-flex">
+                <!-- <div class="flex-shrink-0">
+                  <div class="item-logo">
+                    <img src="/assets/img/theme2.png" alt="logo" width="100" height="100" />
+                  </div>
+                </div> -->
+                <div class="media-body flex-grow-1">
+                  <h4 class="item-title">{{details.sellerName}}</h4>
+                  <div class="item-phn">
+                    {{details.sellerNumber}}
+                  </div>
+                  <div class="item-mail">{{details.sellerEmail}}</div>
+                  <div class="item-mail"><b>Address:</b> <br/>{{details.sellerAddress}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="widget widget-listing-box1 no-print" *ngIf="latestProperties?.length">
+              <h3 class="widget-subtitle">Latest Listing</h3>
+              <div class="widget-listing" [ngClass]="{'no-brd': isLast}" *ngFor="let propValue of latestProperties; let isLast = last">
+                <div class="item-img">
+                  <a routerLink="/properties/{{propValue.id}}">
+                    <img [src]="backendurl + '/' + propValue.images[0].path" alt="widget" width="120" height="102" style="max-height: 102px;" />
+                  </a>
+                </div>
+                <div class="item-content">
+                  <h5 class="item-title">
+                    <a routerLink="/properties/{{propValue.id}}">{{propValue.title}}</a>
+                  </h5>
+                  <div class="location-area">
+                    <i class="flaticon-maps-and-flags"></i>{{propValue.city?.name}}
+                  </div>
+                  <!-- <div class="item-price">{{propValue.propertyStatus?.status}}</div> -->
+                </div>
+              </div>
+              <!-- <div class="widget-listing">
+                <div class="item-img">
+                  <a routerLink="/properties/1"><img src="/assets/img/blog/widget3.jpg" alt="widget" width="120"
+                      height="102" /></a>
+                </div>
+                <div class="item-content">
+                  <h5 class="item-title">
+                    <a routerLink="/properties/1">House Highland Ave Los Angeles</a>
+                  </h5>
+                  <div class="location-area">
+                    <i class="flaticon-maps-and-flags"></i>California
+                  </div>
+                  <div class="item-price">$1,200<span>/mo</span></div>
+                </div>
+              </div>
+              <div class="widget-listing no-brd">
+                <div class="item-img">
+                  <a routerLink="/properties/1"><img src="/assets/img/blog/widget4.jpg" alt="widget" width="120"
+                      height="102" /></a>
+                </div>
+                <div class="item-content">
+                  <h5 class="item-title">
+                    <a routerLink="/properties/1">House Highland Ave Los Angeles</a>
+                  </h5>
+                  <div class="location-area">
+                    <i class="flaticon-maps-and-flags"></i>California
+                  </div>
+                  <div class="item-price">$1,900<span>/mo</span></div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

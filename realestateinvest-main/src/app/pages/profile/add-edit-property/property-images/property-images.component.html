@@ -1,0 +1,42 @@
+<form id="rtcl-property-form" class="form-horizontal form-inline" autocomplete="nope" (submit)="onSubmitImages()">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="formFileSm" class="control-label">Select Image</label>
+        <input class="form-control form-control-sm" id="formFileSm" type="file" accept="image/*" (change)="onChangeFile($event)" />
+      </div>
+    </div>
+    <div class="col btn-section">
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onUploadFile()" [disabled]="uploadLoading">
+        <i class="fa fa-circle-notch fa-spin" *ngIf="uploadLoading"></i>
+        Upload
+      </button>
+    </div>
+  </div>
+  <div class="row uploaded-image-section" *ngIf="previewImages?.length > 0">
+    <div class="col-2 image-section" *ngFor="let imageData of previewImages; let i = index">
+      <div class="row">
+        <div class="col-12 img-section">
+          <img [src]="imageData.image" class="img-fluid" />
+          <div class="remove-btn">
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="onRemoveImage(imageData, i)">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group d-flex align-items-center justify-content-end">
+        <button type="button" name="rtcl-general-prev" class="btn btn-primary outline mr-2" (click)="onPreviousPage()" [disabled]="submitLoading">
+          Previous
+        </button>
+        <button type="submit" name="rtcl-images" class="btn btn-primary" [disabled]="submitLoading">
+          <i class="fa fa-circle-notch fa-spin" *ngIf="submitLoading"></i>
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

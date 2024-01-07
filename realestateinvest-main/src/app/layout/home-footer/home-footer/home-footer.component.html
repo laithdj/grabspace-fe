@@ -1,0 +1,100 @@
+<!--=====================================-->
+<!--=   Footer     Start                =-->
+<!--=====================================-->
+
+<footer class="footer-area no-print">
+  <div class="footer-top" [ngClass]="{'footer-top-style': isHomePage}">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+          <div class="footer-logo-area" [ngClass]="{'footer-logo-area-2': isHomePage}">
+            <div class="item-logo">
+              <img [src]="isHomePage ? '/assets/img/logo_light.png' : '/assets/img/logo.png'" width="190" height="80"
+                alt="logo" class="img-fluid">
+            </div>
+            <p>Real estate investment involves purchasing, owning, managing, renting, or selling real property for
+              profit. It is a popular form of investment that can offer various financial benefits and is considered a
+              tangible asset.
+            </p>
+            <div class="item-social">
+              <ul>
+                <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="https://vimeo.com/" target="_blank"><i class="fab fa-vimeo-v"></i></a></li>
+                <li><a href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-p"></i></a></li>
+                <li><a href="https://web.whatsapp.com/" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
+          <div class="footer-link" [ngClass]="{'footer-link-style-2': isHomePage}">
+            <div class="footer-title" [ngClass]="{'footer-title-style2': isHomePage}">
+              <h3>Quick Links</h3>
+            </div>
+            <div class="item-link">
+              <ul>
+                <li><a routerLink="/about">About Us </a></li>
+                <li><a href="blog-details1.html">Blogs & Articles </a></li>
+                <li><a href="about-1.html">Terms & Conditions</a></li>
+                <li><a href="about-1.html">Privacy Policy </a></li>
+                <li><a routerLink="/contact">Contact Us </a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+          <div class="footer-contact" [ngClass]="{'footer-contact-style-2': isHomePage}">
+            <div class="footer-title" [ngClass]="{'footer-title-style2': isHomePage}">
+              <h3>Contact</h3>
+            </div>
+            <div class="footer-location">
+              <ul>
+                <li class="item-map"><i class="fas fa-map-marker-alt"></i>Norris Road, Brisbane
+                  
+                  4000, Australia</li>
+                <li><a href="mailto:info@example.com"><i class="fas fa-envelope"></i>admin@realinvestment.com.au</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom" [ngClass]="{'footer-bottom-style-2': isHomePage}">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-6">
+          <div class="copyright-area1">
+            <ul>
+              <li><a href="about-1.html">Terms of Use</a></li>
+              <li><a href="about-1.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="copyright-area2">
+            <p>2024 © All rights served by Real Investment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- start back to top -->
+<a href="javascript:void(0)" id="back-to-top">
+  <i class="fas fa-angle-double-up"></i>
+</a>
+<!-- End back to top -->
+<!-- </div> -->
+<div id="template-search" class="template-search">
+  <button type="button" class="close">×</button>
+  <form class="search-form">
+    <input type="search" value="" placeholder="Search" />
+    <button type="submit" class="search-btn btn-ghost style-1">
+      <i class="flaticon-search"></i>
+    </button>
+  </form>
+</div>

@@ -1,0 +1,22 @@
+@media print {
+  .single-listing-wrap1 {
+    padding: 0 !important;
+  }
+  .overview-area.listing-area {
+    // clear: both;
+    // page-break-before: auto !important;
+    page-break-inside: avoid !important;
+  }
+  .overview-area.single-details-box.table-responsive {
+    page-break-inside: avoid !important;
+  }
+  .overview-area.floor-plan-box {
+    page-break-inside: avoid !important;
+    .card {
+      page-break-inside: avoid !important; 
+    }
+  }
+  .widget.widget-contact-box {
+    page-break-inside: avoid !important;
+  }
+}

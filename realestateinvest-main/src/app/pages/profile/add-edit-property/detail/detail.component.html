@@ -1,0 +1,237 @@
+<form id="rtcl-property-form" class="form-horizontal" autocomplete="nope" (submit)="onSubmitDetails()">
+  <div class="row">
+    <div class="col-2">
+      <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.bedrooms}">
+        <label class="control-label">
+          How many Bedrooms? <strong class="rtcl-required">*</strong>
+        </label>
+        <input type="text" name="bedrooms" class="form-control" [(ngModel)]="propertyForm.bedrooms" />
+        <div class="error" *ngIf="submitted && !propertyForm.bedrooms">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.bathrooms}">
+        <label class="control-label">
+          How many Bathrooms? <strong class="rtcl-required">*</strong>
+        </label>
+        <input type="text" name="bathrooms" class="form-control" [(ngModel)]="propertyForm.bathrooms" />
+        <div class="error" *ngIf="submitted && !propertyForm.bathrooms">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.propertyAge}">
+        <label class="control-label">
+          Property Age <strong class="rtcl-required">*</strong>
+        </label>
+        <input type="text" name="propertyAge" class="form-control" [(ngModel)]="propertyForm.propertyAge" />
+        <div class="error" *ngIf="submitted && !propertyForm.propertyAge">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.landSize}">
+        <label class="control-label">
+          Land Size (in sqft.) <strong class="rtcl-required">*</strong>
+        </label>
+        <input type="text" name="landSize" class="form-control" [(ngModel)]="propertyForm.landSize"
+          autocomplete="off" />
+        <div class="error" *ngIf="submitted && !propertyForm.landSize">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.area}">
+        <label class="control-label">
+          Area (in sqft.) <strong class="rtcl-required">*</strong>
+        </label>
+        <input type="text" name="area" class="form-control" [(ngModel)]="propertyForm.area" autocomplete="off" />
+        <div class="error" *ngIf="submitted && !propertyForm.area">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.salePrice}">
+        <label class="control-label">
+          Sale Price <strong class="rtcl-required">*</strong>
+        </label>
+        <input type="text" name="salePrice" class="form-control" [(ngModel)]="propertyForm.salePrice" />
+        <div class="error" *ngIf="submitted && !propertyForm.salePrice">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+        <label class="control-label">
+          Rent Yeild
+        </label>
+        <input type="text" name="rentYield" class="form-control" [(ngModel)]="propertyForm.rentYield" />
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+        <label class="control-label">
+          Weekly Current Rent
+        </label>
+        <input type="text" name="weeklyCurrentRent" class="form-control" [(ngModel)]="propertyForm.weeklyCurrentRent" />
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+        <label class="control-label">
+          Weekly Rental Appraisal
+        </label>
+        <input type="text" name="weeeklyRentalAppraisal" class="form-control"
+          [(ngModel)]="propertyForm.weeeklyRentalAppraisal" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.propertyValueGrowth}">
+        <label class="control-label">
+          Property Value Growth (%) <strong class="rtcl-required">*</strong>
+        </label>
+        <input type="text" name="propertyValueGrowth" class="form-control"
+          [(ngModel)]="propertyForm.propertyValueGrowth" />
+        <div class="error" *ngIf="submitted && !propertyForm.propertyValueGrowth">{{ERROR_MESSAGES.FIELD_REQUIRED}}
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label class="control-label">
+          Rental Market Price
+        </label>
+        <input type="text" name="rentalMarketPrice" class="form-control" [(ngModel)]="propertyForm.rentalMarketPrice" />
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label class="control-label">
+          Vacancy Rate
+        </label>
+        <input type="text" name="vacancyRate" class="form-control" [(ngModel)]="propertyForm.vacancyRate" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <div class="form-group">
+        <input id="hideSalePrice" class="checkbox-custom" name="hideSalePrice" type="checkbox"
+          [(ngModel)]="propertyForm.hideSalePrice" />
+        <label for="hideSalePrice" class="checkbox-custom-label no-select">Hide Sales Price?</label>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+        <input id="parkingAvailable" class="checkbox-custom" name="parkingAvailable" type="checkbox"
+          [(ngModel)]="propertyForm.parkingAvailable" />
+        <label for="parkingAvailable" class="checkbox-custom-label no-select">Parking Available?</label>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+        <input id="currentlyTenanted" class="checkbox-custom" name="currentlyTenanted" type="checkbox"
+          [(ngModel)]="propertyForm.currentlyTenanted" />
+        <label for="currentlyTenanted" class="checkbox-custom-label no-select">Currently Tenanted?</label>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+        <input id="floodZone" class="checkbox-custom" name="floodZone" type="checkbox"
+          [(ngModel)]="propertyForm.floodZone" />
+        <label for="floodZone" class="checkbox-custom-label no-select">Flood Zone?</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <div class="form-group">
+        <input id="fireZone" class="checkbox-custom" name="fireZone" type="checkbox"
+          [(ngModel)]="propertyForm.fireZone" />
+        <label for="fireZone" class="checkbox-custom-label no-select">Fire Zone?</label>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+        <input id="landDAApproved" class="checkbox-custom" name="landDAApproved" type="checkbox"
+          [(ngModel)]="propertyForm.landDAApproved" />
+        <label for="landDAApproved" class="checkbox-custom-label no-select">Land DA Approved?</label>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+        <input id="isBodyCorporate" class="checkbox-custom" name="isBodyCorporate" type="checkbox"
+          [(ngModel)]="propertyForm.isBodyCorporate" />
+        <label for="isBodyCorporate" class="checkbox-custom-label no-select">Is Body Corporate?</label>
+      </div>
+      <div class="form-group" *ngIf="propertyForm.isBodyCorporate">
+        <label class="control-label">
+          Body Corporate Value
+        </label>
+        <input type="text" name="bodyCorporateValue" class="form-control"
+          [(ngModel)]="propertyForm.bodyCorporateValue" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group with-error" [ngClass]="{'with-error': submitted && !propertyForm.amenities}">
+        <label class="control-label">
+          Features & Amenities <strong class="rtcl-required">*</strong>
+        </label>
+        <ng-select [(ngModel)]="propertyForm.amenities" name="amenities" [items]="amenitiesList"
+          bindValue="id" bindLabel="name" [multiple]="true"></ng-select>
+        <div class="error" *ngIf="submitted && !propertyForm.amenities">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h5 class="form-subtitle">Add Floor Plans</h5>
+    </div>
+    <div class="col-12 multi-add-section">
+      <div class="row" *ngFor="let floorValue of floorPlans; let i=index;let isFirst=first; let isLast = last;">
+        <div class="col-4">
+          <div class="form-group">
+            <label class="control-label">Title</label>
+            <input type="text" name="titleName_{{i}}" id="titleName_{{i}}" autocomplete="off" [(ngModel)]="floorValue.title" class="form-control" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="formFileSm" class="control-label">Image</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="file" (change)="onSelectFile($event, floorValue)" />
+          </div>
+        </div>
+        <div class="col-1" *ngIf="floorValue.imageSrc">
+          <div class="form-group">
+            <img [src]="floorValue.imageSrc" alt="" class="img img-responsive floor-plan-img" />
+          </div>
+        </div>
+        <div class="col-3 btn-section">
+          <div class="form-group">
+            <label class="control-label pt-30">&nbsp;</label>
+            <button type="button" class="btn btn-outline-danger btn-sm remove-btn" title="Remove plan" *ngIf="floorPlans.length > 1" (click)="removeFloorPlan(i)">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button type="button" class="btn btn-outline-primary btn-sm" title="Add more plan" *ngIf="isLast" (click)="addFloorPlan()">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group d-flex align-items-center justify-content-end">
+        <button type="button" name="rtcl-general-prev" class="btn btn-primary outline mr-2" (click)="onPreviousPage()" [disabled]="submitLoading">
+          Previous
+        </button>
+        <button type="submit" name="rtcl-general-next" class="btn btn-primary" [disabled]="submitLoading">
+          <i class="fa fa-circle-notch fa-spin" *ngIf="submitLoading"></i>
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

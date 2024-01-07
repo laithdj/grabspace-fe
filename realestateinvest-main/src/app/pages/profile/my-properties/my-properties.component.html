@@ -1,0 +1,68 @@
+<!--=====================================-->
+<!--=   Breadcrumb     Start            =-->
+<!--=====================================-->
+<div class="breadcrumb-wrap">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item"><a routerLink="/profile">My Profile</a></li>
+        <li class="breadcrumb-item active" aria-current="page">My Properties</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!--=====================================-->
+<!--=   Account     Start               =-->
+<!--=====================================-->
+<main class="site-main content-area">
+  <div class="container">
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-12">
+        <div class="page-content-block">
+          <div class="col-md-12 rtcl-login-form-wrap">
+            <h5 class="profile-title">My Properties</h5>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped property-table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <!-- <th>Status</th> -->
+                    <th>City</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="propertyList?.length > 0; else showNoRecordData">
+                  <tr *ngFor="let pData of propertyList">
+                    <td>{{pData.title}}</td>
+                    <td>{{pData.propertyType?.type}}</td>
+                    <!-- <td>{{pData.propertyStatus?.status}}</td> -->
+                    <td>{{pData.city?.name}}</td>
+                    <td class="action">
+                      <a routerLink="/profile/edit-property/{{pData.id}}/general">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                      <a href="javascript:;" (click)="deleteProperty(pData)">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+                <ng-template #showNoRecordData>
+                  <tbody>
+                    <tr>
+                      <td colspan="6" class="text-danger">No Properties registered yet.</td>
+                    </tr>
+                  </tbody>
+                </ng-template>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

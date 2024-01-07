@@ -1,0 +1,99 @@
+<!--=====================================-->
+<!--=   Breadcrumb     Start            =-->
+<!--=====================================-->
+<div class="breadcrumb-wrap">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">My Profile</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!--=====================================-->
+<!--=   Account     Start               =-->
+<!--=====================================-->
+<main class="site-main content-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-12">
+        <div class="page-content-block">
+          <div class="col-md-12 rtcl-login-form-wrap">
+            <p-toast></p-toast>
+            <h5 class="profile-title">My Profile</h5>
+            <form id="rtcl-profile-form" class="form-horizontal" autocomplete="nope" (submit)="onSubmitProfile()">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group" [ngClass]="{'with-error': submitted && !profileForm.firstName}">
+                    <label class="control-label">
+                      First Name <strong class="rtcl-required">*</strong>
+                    </label>
+                    <input type="text" name="firstName" class="form-control" [(ngModel)]="profileForm.firstName" />
+                    <div class="error" *ngIf="submitted && !profileForm.firstName">{{ERROR_MESSAGES.FIELD_REQUIRED}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group" [ngClass]="{'with-error': submitted && !profileForm.lastName}">
+                    <label class="control-label">
+                      Last Name <strong class="rtcl-required">*</strong>
+                    </label>
+                    <input type="text" name="lastName" class="form-control" [(ngModel)]="profileForm.lastName" />
+                    <div class="error" *ngIf="submitted && !profileForm.lastName">{{ERROR_MESSAGES.FIELD_REQUIRED}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group"
+                    [ngClass]="{'with-error': (submitted && !profileForm.email) || errors.invalidEmail}">
+                    <label class="control-label">
+                      Email <strong class="rtcl-required">*</strong>
+                    </label>
+                    <input type="email" name="email" class="form-control" [(ngModel)]="profileForm.email"
+                      (ngModelChange)="validateProfileForm()" />
+                    <div class="error" *ngIf="submitted && !profileForm.email">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+                    <div class="error" *ngIf="profileForm.email && errors.invalidEmail">
+                      {{ERROR_MESSAGES.INVALID_EMAIL}}</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group" [ngClass]="{'with-error': submitted && !profileForm.contactNumber}">
+                    <label class="control-label">
+                      Contact Number <strong class="rtcl-required">*</strong>
+                    </label>
+                    <input type="text" name="contactNumber" class="form-control"
+                      [(ngModel)]="profileForm.contactNumber" />
+                    <div class="error" *ngIf="submitted && !profileForm.contactNumber">
+                      {{ERROR_MESSAGES.FIELD_REQUIRED}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="control-label">
+                      Address
+                    </label>
+                    <textarea name="userAddress" cols="10" class="form-control textarea"
+                      [(ngModel)]="profileForm.address" autocomplete="nope"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group d-flex align-items-center">
+                <button type="submit" name="rtcl-login" class="btn btn-primary" value="updateProfile"
+                  [disabled]="submitLoading">
+                  <i class="fa fa-circle-notch fa-spin" *ngIf="submitLoading"></i>
+                  Update Profile
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

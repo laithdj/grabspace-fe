@@ -1,0 +1,251 @@
+<header [class]="isHomePage ? 'header no-print' : 'rt-header sticky-on no-print'">
+  <div [id]="isHomePage ? 'rt-sticky-placeholder' : 'sticky-placeholder'"></div>
+  <div [id]="isHomePage ? 'header-menu' : 'navbar-wrap'" class="header-menu menu-layout1" [ngClass]="{'menu-layout3': !isHomePage}">
+    <div class="container">
+      <div class="row d-flex align-items-center">
+        <div class="col-xl-2 col-lg-2">
+          <div class="logo-area">
+            <a routerLink="/" class="temp-logo">
+              <img [src]="isHomePage ? 'assets/img/logo_light.png' : 'assets/img/logo.png'" width="190" height="80" alt="logo" class="img-fluid">
+            </a>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 d-flex justify-content-start position-static">
+          <nav id="dropdown" class="template-main-menu" [ngClass]="{'template-main-menu-3': !isHomePage}">
+            <ul>
+              <li>
+                <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+              </li>
+              <li>
+                <a routerLink="about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a>
+              </li>
+              <li>
+                <a routerLink="properties" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Properties</a>
+              </li>
+              <li>
+                <a routerLink="contact" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact</a>
+              </li>
+              <li *ngIf="loginUserData">
+                <a routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">My Profile</a>
+                <ul class="dropdown-menu-col-1">
+                  <li>
+                    <a routerLink="/profile/my-properties">My Properties</a>
+                  </li>
+                  <li>
+                    <a routerLink="/profile/add-property">Add Property</a>
+                  </li>
+                </ul>
+              </li>
+              <!-- <li>
+                <a href="agent-lists1.html">Agents</a>
+                <ul class="dropdown-menu-col-1">
+                  <li>
+                    <a href="agent-lists1.html">Agent List Page</a>
+                  </li>
+                  <li>
+                    <a href="agency-lists1.html">Agencies List Page</a>
+                  </li>
+                  <li>
+                    <a href="single-agent1.html">Single Agent Page</a>
+                  </li>
+                  <li>
+                    <a href="single-agency1.html">Single Agency Page</a>
+                  </li>
+                </ul>
+              </li> -->
+              <!-- <li class="position-static hide-on-mobile-menu">
+                <a routerLink="/">Pages</a>
+                <div class="template-mega-menu">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="menu-ctg-title">Pages</div>
+                        <ul class="sub-menu">
+                          <li>
+                            <a href="blog1.html">
+                              <i class="fas fa-chart-pie"></i>Blog 1</a>
+                          </li>
+                          <li>
+                            <a href="blog2.html">
+                              <i class="fas fa-chart-pie"></i>Blog 2</a>
+                          </li>
+                          <li>
+                            <a href="blog-details1.html">
+                              <i class="fas fa-chart-pie"></i>Blog Details Page</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-3">
+                        <div class="menu-ctg-title">Pages</div>
+                        <ul class="sub-menu">
+                          <li>
+                            <a href="agent-lists1.html"><i class="fas fa-user"></i>Agent List Page</a>
+                          </li>
+                          <li>
+                            <a href="agency-lists1.html"><i class="fas fa-user"></i>Agencies List</a>
+                          </li>
+                          <li>
+                            <a href="agent-reviews1.html"><i class="fas fa-user"></i>Agent Reviews Page</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-3">
+                        <div class="menu-ctg-title">Pages</div>
+                        <ul class="sub-menu">
+                          <li>
+                            <a href="agent-reviews1.html"><i class="far fa-money-bill-alt"></i>Agent Reviews Page</a>
+                          </li>
+                          <li>
+                            <a href="about-1.html">
+                              <i class="fas fa-camera"></i>About page</a>
+                          </li>
+                          <li>
+                            <a href="agent-lists1.html">
+                              <i class="far fa-address-card"></i>Agent List Page</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-3">
+                        <div class="menu-ctg-title">Pages</div>
+                        <ul class="sub-menu">
+                          <li>
+                            <a href="pricing-1.html">
+                              <i class="fas fa-chalkboard-teacher"></i>Pricing Plan
+                            </a>
+                          </li>
+                          <li>
+                            <a href="404.html">
+                              <i class="fas fa-exclamation-triangle"></i>
+                              Error Page</a>
+                          </li>
+                          <li>
+                            <a href="contact.html">
+                              <i class="fas fa-spinner"></i>Contact Page</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li> -->
+              <!-- <li class="hide-on-desktop-menu">
+                <a routerLink="/">Pages</a>
+                <ul>
+                  <li>
+                    <a href="about-1.html">About</a>
+                  </li>
+                  <li>
+                    <a href="with-sidebar2.html">Property</a>
+                  </li>
+                  <li>
+                    <a href="blog1.html">Blog</a>
+                  </li>
+                  <li>
+                    <a href="404.html">404 Error</a>
+                  </li>
+                  <li>
+                    <a href="contact.html">Contact</a>
+                  </li>
+                </ul>
+              </li> -->
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xl-4 col-lg-4 d-flex justify-content-end">
+          <div class="header-action-layout1">
+            <ul class="action-list">
+              <!-- <li class="action-item-style left-right-btn">
+                <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Compare">
+                  <i class="flaticon-left-and-right-arrows" [ngClass]="{'icon-round': !isHomePage}"></i>
+                  <div class="item-count">0</div>
+                </a>
+              </li> -->
+              <!-- <li class="action-item-style wish-btn">
+                <a href="favourite.html" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Favourites">
+                  <i class="flaticon-heart" [ngClass]="{'icon-round': !isHomePage}"></i>
+                  <div class="item-count">0</div>
+                </a>
+              </li> -->
+              <li class="action-item-style my-account" *ngIf="!loginUserData">
+                <a routerLink="/account" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sign In">
+                  <i class="flaticon-user-1" [ngClass]="{'icon-round': !isHomePage}"></i>
+                </a>
+              </li>
+              <li class="action-item-style my-account" *ngIf="loginUserData">
+                <a (click)="onLogout()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout">
+                  <i class="fa-solid fa-arrow-right-from-bracket" [ngClass]="{'icon-round': !isHomePage}"></i>
+                </a>
+              </li>
+              <li class="listing-button">
+                <a routerLink="/profile/add-property" class="listing-btn">
+                  <span>
+                    <i class="fas fa-plus-circle"></i>
+                  </span>
+                  <span class="item-text">Add Property</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="rt-header-menu mean-container position-relative no-print" id="meanmenu">
+  <div class="mean-bar">
+    <a routerLink="/">
+      <img src='assets/img/logo_light2.svg' alt='logo' class='img-fluid' />
+    </a>
+    <div class="mean-bar--right">
+      <div class="actions search">
+        <a href="#template-search" class="item-icon" title="Search">
+          <i class="fas fa-search"></i>
+        </a>
+      </div>
+      <div class="actions user">
+        <a href="account.html"><i class="flaticon-user"></i></a>
+      </div>
+      <span class="sidebarBtn">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </span>
+    </div>
+  </div>
+  <div class="rt-slide-nav">
+    <div class="offscreen-navigation">
+      <nav class="menu-main-primary-container">
+        <ul class="menu">
+          <li class="list menu-item-parent">
+            <a class="animation" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+          </li>
+          <li class="list menu-item-parent">
+            <a routerLink="about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a>
+          </li>
+          <li class="list menu-item-parent">
+            <a routerLink="properties" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Properties</a>
+          </li>
+          <li class="list menu-item-parent">
+            <a routerLink="contact" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact</a>
+          </li>
+          <li class="list menu-item-parent menu-item-has-children" *ngIf="loginUserData">
+            <a class="animation" routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">My Profile</a>
+            <ul class="main-menu__dropdown sub-menu">
+              <li>
+                <a routerLink="/profile/my-properties">My Properties</a>
+              </li>
+              <li>
+                <a routerLink="/profile/add-property">Add Property</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+<!--=====================================-->
+<!--=   Header     Start             =-->
+<!--=====================================-->
+

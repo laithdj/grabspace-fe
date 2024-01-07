@@ -1,0 +1,26 @@
+::ng-deep {
+  .step-form-body {
+    margin-top: 35px;
+  }
+  .p-steps .p-steps-item .p-menuitem-link:not(.p-disabled):focus {
+    // box-shadow: 0 0 0 0.2rem rgb(0 193 148 / 40%);
+    box-shadow: none;
+  }
+  .p-steps .p-steps-item .p-menuitem-link .p-steps-number {
+    background: #ffffff;
+    color: var(--rt-primary-color);
+    border-color: var(--rt-primary-color);
+  }
+  .p-steps .p-steps-item.p-highlight .p-steps-number {
+    background: var(--rt-primary-color);
+    color: #fff;
+    border-color: var(--rt-primary-color);
+  } 
+  .p-steps .p-steps-item:before {
+    border-top: 1px solid var(--rt-primary-color);
+  }
+  .p-steps .p-steps-item .p-menuitem-link .p-steps-title {
+    color: var(--rt-primary-color);
+  }
+  
+}

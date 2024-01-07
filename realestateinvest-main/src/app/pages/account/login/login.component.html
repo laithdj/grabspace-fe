@@ -1,0 +1,71 @@
+<!--=====================================-->
+<!--=   Breadcrumb     Start            =-->
+<!--=====================================-->
+<div class="breadcrumb-wrap">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Login</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!--=====================================-->
+<!--=   Account     Start               =-->
+<!--=====================================-->
+<main class="site-main content-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-12">
+        <div class="page-content-block">
+          <div class="col-md-12 rtcl-login-form-wrap">
+            <h5 class="profile-title">Login</h5>
+            <p-toast></p-toast>
+            <form id="rtcl-login-form" class="form-horizontal" autocomplete="nope" (submit)="onSubmitLogin()">
+              <div class="form-group"
+                [ngClass]="{'with-error': (submitted && !loginForm.email) || errors.invalidEmail}">
+                <label class="control-label">
+                  Email <strong class="rtcl-required">*</strong>
+                </label>
+                <input type="email" name="email" class="form-control" [(ngModel)]="loginForm.email"
+                  (ngModelChange)="validateLoginForm()" />
+                <div class="error" *ngIf="submitted && !loginForm.email">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+                <div class="error" *ngIf="loginForm.email && errors.invalidEmail">{{ERROR_MESSAGES.INVALID_EMAIL}}
+                </div>
+              </div>
+              <div class="form-group"
+                [ngClass]="{'with-error': (submitted && !loginForm.password) || errors.invalidPassword}">
+                <label class="control-label">
+                  Password <strong class="rtcl-required">*</strong>
+                </label>
+                <input type="password" name="password" class="form-control" [(ngModel)]="loginForm.password" />
+                <div class="error" *ngIf="submitted && !loginForm.password">{{ERROR_MESSAGES.FIELD_REQUIRED}}
+                </div>
+                <div class="error" *ngIf="loginForm.password && errors.invalidPassword">
+                  {{ERROR_MESSAGES.INVALID_PASSWORD}}</div>
+              </div>
+              <div class="form-group d-flex align-items-center">
+                <button type="submit" name="rtcl-login" class="btn btn-primary" value="login">
+                  Login
+                </button>
+                <div class="form-check">
+                  <input type="checkbox" name="rememberme" id="rtcl-rememberme" [(ngModel)]="loginForm.rememberMe" />
+                  <label class="form-check-label" for="rtcl-rememberme"> Remember Me</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="rtcl-forgot-password">
+                  Don't have an account yet? <a routerLink="/account/register">Create one</a>
+                </div>
+                <!-- <div class="rtcl-forgot-password">
+                  <a href="#">Forgot Your Password</a>
+                </div> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

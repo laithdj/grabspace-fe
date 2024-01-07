@@ -1,0 +1,127 @@
+<!--=====================================-->
+<!--=   Breadcrumb     Start            =-->
+<!--=====================================-->
+<div class="breadcrumb-wrap">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Create an account</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!--=====================================-->
+<!--=   Account     Start               =-->
+<!--=====================================-->
+<main class="site-main content-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-12">
+        <div class="page-content-block">
+          <div class="col-md-12 rtcl-login-form-wrap">
+            <h5 class="profile-title">Create an Account</h5>
+            <p-toast></p-toast>
+            <form id="rtcl-register-form" class="form-horizontal" autocomplete="nope" (submit)="onSubmitRegister()">
+              <div class="row">
+                <div class="col-4">
+                  <div class="form-group" [ngClass]="{'with-error': submitted && !registerForm.firstName}">
+                    <label class="control-label">
+                      First Name <strong class="rtcl-required">*</strong>
+                    </label>
+                    <input type="text" name="firstName" class="form-control" [(ngModel)]="registerForm.firstName" />
+                    <div class="error" *ngIf="submitted && !registerForm.firstName">{{ERROR_MESSAGES.FIELD_REQUIRED}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group" [ngClass]="{'with-error': submitted && !registerForm.lastName}">
+                    <label class="control-label">
+                      Last Name <strong class="rtcl-required">*</strong>
+                    </label>
+                    <input type="text" name="lastName" class="form-control" [(ngModel)]="registerForm.lastName" />
+                    <div class="error" *ngIf="submitted && !registerForm.lastName">{{ERROR_MESSAGES.FIELD_REQUIRED}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group" [ngClass]="{'with-error': submitted && !registerForm.contactNumber}">
+                    <label class="control-label">
+                      Contact Number <strong class="rtcl-required">*</strong>
+                    </label>
+                    <input type="text" name="contactNumber" class="form-control"
+                      [(ngModel)]="registerForm.contactNumber" />
+                    <div class="error" *ngIf="submitted && !registerForm.contactNumber">
+                      {{ERROR_MESSAGES.FIELD_REQUIRED}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <div class="form-group"
+                    [ngClass]="{'with-error': (submitted && !registerForm.email) || errors.invalidEmail}">
+                    <label class="control-label">
+                      Email <strong class="rtcl-required">*</strong>
+                    </label>
+                    <input type="email" name="email" class="form-control" [(ngModel)]="registerForm.email"
+                      (ngModelChange)="validateRegisterForm()" />
+                    <div class="error" *ngIf="submitted && !registerForm.email">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+                    <div class="error" *ngIf="registerForm.email && errors.invalidEmail">
+                      {{ERROR_MESSAGES.INVALID_EMAIL}}</div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group"
+                    [ngClass]="{'with-error': (submitted && !registerForm.password) || errors.invalidPassword}">
+                    <label class="control-label">
+                      Password <strong class="rtcl-required">*</strong>
+                    </label>
+                    <input type="password" name="password" class="form-control" [(ngModel)]="registerForm.password"
+                      (ngModelChange)="registerForm.confirmPassword = ''; validateRegisterForm()" />
+                    <div class="error" *ngIf="submitted && !registerForm.password">{{ERROR_MESSAGES.FIELD_REQUIRED}}
+                    </div>
+                    <div class="error" *ngIf="registerForm.password && errors.invalidPassword">
+                      {{ERROR_MESSAGES.INVALID_PASSWORD}}</div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group"
+                    [ngClass]="{'with-error': (submitted && !registerForm.confirmPassword) || errors.invalidConfirmPassword}">
+                    <label class="control-label">
+                      Confirm Password <strong class="rtcl-required">*</strong>
+                    </label>
+                    <input type="password" name="confirmPassword" class="form-control"
+                      [(ngModel)]="registerForm.confirmPassword" (ngModelChange)="validateRegisterForm()" />
+                    <div class="error" *ngIf="submitted && !registerForm.confirmPassword">
+                      {{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+                    <div class="error" *ngIf="registerForm.confirmPassword && errors.invalidConfirmPassword">
+                      {{ERROR_MESSAGES.PASSWORD_NOT_MATCH}}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="control-label">
+                      Address
+                    </label>
+                    <textarea name="userAddress" cols="10" class="form-control textarea"
+                      [(ngModel)]="registerForm.address" autocomplete="nope"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group d-flex align-items-center">
+                <button type="submit" name="rtcl-login" class="btn btn-primary" value="login"
+                  [disabled]="submitLoading">
+                  <i class="fa fa-circle-notch fa-spin" *ngIf="submitLoading"></i>
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

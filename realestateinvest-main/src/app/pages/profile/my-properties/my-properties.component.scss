@@ -1,0 +1,52 @@
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    margin-right: 10px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+    color: #07c196;
+    &:hover {
+      color: #07c196;
+      text-decoration: none;
+    }
+  }
+}
+.property-table {
+  tbody tr td {
+    text-align: center;
+  }
+  thead tr th {
+    text-align: center !important;
+    color: var(--rt-primary-color) !important;
+  }
+}
+::ng-deep {
+  .p-dialog .p-dialog-footer {
+    text-align: center;
+  }
+  .p-dialog .p-dialog-footer button {
+    padding: 5px 15px !important;
+    background-color: var(--rt-primary-color);
+    border-color: var(--rt-primary-color);
+    &:focus {
+      box-shadow: none;
+    }
+    &:hover {
+      background-color: #fff;
+      color: var(--rt-primary-color);
+      border-color: var(--rt-primary-color);
+    }
+    &.p-confirm-dialog-reject {
+      background-color: #dc3545;
+      border-color: #dc3545;
+      &:hover {
+        background-color: #fff;
+        color: #dc3545;
+        border-color: #dc3545;
+      }
+    }
+  }
+}

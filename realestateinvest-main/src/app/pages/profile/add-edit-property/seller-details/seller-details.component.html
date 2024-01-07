@@ -1,0 +1,55 @@
+<form id="rtcl-property-form" class="form-horizontal" autocomplete="nope" (submit)="onSubmitSellerDetails()">
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.sellerName}">
+        <label class="control-label">
+          Seller Full Name <strong class="rtcl-required">*</strong>
+        </label>
+        <input type="text" name="sellerName" class="form-control" [(ngModel)]="propertyForm.sellerName" />
+        <div class="error" *ngIf="submitted && !propertyForm.sellerName">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.sellerEmail}">
+        <label class="control-label">
+          Seller Email <strong class="rtcl-required">*</strong>
+        </label>
+        <input type="text" name="sellerEmail" class="form-control" [(ngModel)]="propertyForm.sellerEmail" />
+        <div class="error" *ngIf="submitted && !propertyForm.sellerEmail">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group" [ngClass]="{'with-error': submitted && !propertyForm.sellerNumber}">
+        <label class="control-label">
+          Seller Contact Number <strong class="rtcl-required">*</strong>
+        </label>
+        <input type="text" name="sellerNumber" class="form-control" [(ngModel)]="propertyForm.sellerNumber" />
+        <div class="error" *ngIf="submitted && !propertyForm.sellerNumber">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label class="control-label">
+          Seller Address
+        </label>
+        <textarea name="sellerAddress" cols="10" class="form-control textarea" [(ngModel)]="propertyForm.sellerAddress"
+          autocomplete="nope"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group d-flex align-items-center justify-content-end">
+        <button type="button" name="rtcl-general-prev" class="btn btn-primary outline mr-2" (click)="onPreviousPage()" [disabled]="submitLoading">
+          Previous
+        </button>
+        <button type="submit" name="rtcl-general" class="btn btn-primary" [disabled]="submitLoading">
+          <i class="fa fa-circle-notch fa-spin" *ngIf="submitLoading"></i>
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
