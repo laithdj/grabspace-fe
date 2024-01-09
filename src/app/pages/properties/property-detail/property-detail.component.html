@@ -32,12 +32,11 @@
                 <div class="item-categoery">{{details.propertyStatus?.status}}</div>
               </div>
             </div> -->
-            <!-- <div class="col-lg-12 col-md-12 justify-content-end">
+            <div class="col-lg-12 col-md-12 justify-content-end">
               <div class="single-list-price">
-                <ng-container *ngIf="details.hideSalePrice"> <span style="font-size: 20px;">For price: Contact Agent</span></ng-container>
-                <ng-container *ngIf="!details.hideSalePrice">${{details.salePrice}}</ng-container>
+                ${{details.rentPrice | number:'1.2-2'}} <span class="price-suffix">{{details.rentPricePeriod}}</span>
               </div>
-            </div> -->
+            </div>
           </div>
           <div class="row align-items-center">
             <div class="col-lg-8 col-md-12">
@@ -177,7 +176,7 @@
                   </tr>
                   <tr>
                     <td class="item-bold">Rent Price</td>
-                    <td>{{details.rentPrice}}</td>
+                    <td>{{details.rentPrice | number:'1.2-2'}} <span class="table-price-suffix">({{details.rentPricePeriod}})</span></td>
                     <td class="item-bold">Including print and install?</td>
                     <td>{{details.includePrintInstall ? 'Yes' : 'No'}}</td>
                   </tr>
@@ -228,7 +227,7 @@
                   <div class="location-area">
                     <i class="flaticon-maps-and-flags"></i>{{propValue.city?.name}}
                   </div>
-                  <!-- <div class="item-price">{{propValue.propertyStatus?.status}}</div> -->
+                  <div class="item-price">${{propValue.rentPrice | number: '1.2-2'}}<span style="margin-left: 5px;">{{propValue.rentPricePeriod}}</span></div>
                 </div>
               </div>
               <!-- <div class="widget-listing">

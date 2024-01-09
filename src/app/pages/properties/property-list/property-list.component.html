@@ -61,7 +61,17 @@
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Price Range" name="searchPriceRange" [(ngModel)]="searchForm.priceRange">
                     <ng-option value="ALL">Price Range</ng-option>
-                    <ng-option [value]="priceRangeValue.id" *ngFor="let priceRangeValue of rentPriceList">{{priceRangeValue.name}}</ng-option>
+                    <ng-option [value]="priceRange" *ngFor="let priceRange of ['0-500','501-2000','2001-4000','4001-8000','8001-12000','12001-14000','14000+']">
+                      {{priceRange}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-lg-12 pl-15 mb-0">
+                <div class="rld-single-select">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Price Range Period" name="searchPriceRangePeriod" [(ngModel)]="searchForm.priceRangePeriod">
+                    <ng-option value="ALL">Price Range Period</ng-option>
+                    <ng-option [value]="priceRangeValue.id" *ngFor="let priceRangeValue of rentPricePeriodList">{{priceRangeValue.name}}</ng-option>
                   </ng-select>
                 </div>
               </div>
@@ -226,6 +236,7 @@
                         <h3 class="item-title"><a routerLink="/properties/{{pData.id}}">{{pData.title}}</a></h3>
                       </div>
                       <div class="location-area"><i class="flaticon-maps-and-flags"></i>{{pData.city}}</div>
+                      <div class="item-price">${{pData.rentPrice | number: '1.2-2'}}<span style="margin-left: 5px;">{{pData.rentPricePeriod}}</span></div>
                       <!-- <div class="item-categoery3">
                         <ul>
                           <li><i class="flaticon-two-overlapping-square"></i>{{pData.propertyStatus}}</li>

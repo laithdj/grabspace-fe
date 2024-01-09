@@ -19,6 +19,8 @@ export class PropertyListComponent implements OnInit {
     title: string;
     image: string;
     city: string;
+    rentPrice: string;
+    rentPricePeriod: string;
   }> = [];
   priceRangeFilter = null;
   searchForm = {
@@ -28,6 +30,7 @@ export class PropertyListComponent implements OnInit {
     minHeight: 'ALL',
     minWidth: 'ALL',
     priceRange: 'ALL',
+    priceRangePeriod: 'ALL',
     includePrintInstall: 'ALL',
   };
   spaceList = [
@@ -36,7 +39,7 @@ export class PropertyListComponent implements OnInit {
     { id: 'Building wall', name: 'Building wall' },
     { id: 'Moving Vehicles', name: 'Moving Vehicles' },
   ];
-  rentPriceList = [
+  rentPricePeriodList = [
     { id: 'Per week', name: 'Per week' },
     { id: 'Per month', name: 'Per month' },
     { id: 'Per year', name: 'Per year' },
@@ -118,6 +121,9 @@ export class PropertyListComponent implements OnInit {
     if (query.priceRange) {
       filterValues.priceRange = query.priceRange;
     }
+    if (query.priceRangePeriod) {
+      filterValues.priceRangePeriod = query.priceRangePeriod;
+    }
     if (query.includePrintInstall) {
       filterValues.includePrintInstall = query.includePrintInstall;
     }
@@ -166,6 +172,8 @@ export class PropertyListComponent implements OnInit {
               title: propValue.title,
               image: imageSrc,
               city: propValue.city?.name,
+              rentPrice: propValue.rentPrice,
+              rentPricePeriod: propValue.rentPricePeriod,
             })
           }
         }
@@ -202,6 +210,9 @@ export class PropertyListComponent implements OnInit {
     }
     if (this.searchForm.priceRange !== 'ALL') {
       dataToSend.priceRange = this.searchForm.priceRange;
+    }
+    if (this.searchForm.priceRangePeriod !== 'ALL') {
+      dataToSend.priceRangePeriod = this.searchForm.priceRangePeriod;
     }
     if (this.searchForm.includePrintInstall !== 'ALL') {
       dataToSend.includePrintInstall = this.searchForm.includePrintInstall;

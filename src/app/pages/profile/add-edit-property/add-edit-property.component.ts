@@ -75,6 +75,7 @@ export class AddEditPropertyComponent implements OnInit {
             sizeHeight: propRes.sizeHeight || null,
             sizeWidth: propRes.sizeWidth || null,
             rentPrice: propRes.rentPrice || null,
+            rentPricePeriod: propRes.rentPricePeriod || null,
             includePrintInstall: propRes.includePrintInstall || false,
             traffic: propRes.traffic || false,
             viewersPerDay: propRes.viewersPerDay || null,

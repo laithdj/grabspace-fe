@@ -27,7 +27,7 @@ export class DetailComponent implements OnInit {
     { id: 'Building wall', name: 'Building wall' },
     { id: 'Moving Vehicles', name: 'Moving Vehicles' },
   ];
-  rentPriceList = [
+  rentPricePeriodList = [
     { id: 'Per week', name: 'Per week' },
     { id: 'Per month', name: 'Per month' },
     { id: 'Per year', name: 'Per year' },
@@ -62,6 +62,7 @@ export class DetailComponent implements OnInit {
       sizeHeight: detailValues?.sizeHeight || null,
       sizeWidth: detailValues?.sizeWidth || null,
       rentPrice: detailValues?.rentPrice || null,
+      rentPricePeriod: detailValues?.rentPricePeriod || null,
       includePrintInstall: detailValues?.includePrintInstall || false,
       traffic: detailValues?.traffic || false,
       viewersPerDay: detailValues?.viewersPerDay || null,

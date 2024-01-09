@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     { id: 'Building wall', name: 'Building wall' },
     { id: 'Moving Vehicles', name: 'Moving Vehicles' },
   ];
-  rentPriceList = [
+  rentPricePeriodList = [
     { id: 'Per week', name: 'Per week' },
     { id: 'Per month', name: 'Per month' },
     { id: 'Per year', name: 'Per year' },
@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     minHeight: null,
     minWidth: null,
     priceRange: null,
+    priceRangePeriod: null,
     includePrintInstall: null,
   };
   showMoreFilter = false;
@@ -139,6 +140,9 @@ export class HomeComponent implements OnInit {
     if (this.homeSearchForm.priceRange) {
       filters.push(`priceRange=${encodeURIComponent(this.homeSearchForm.priceRange)}`);
     }
+    if (this.homeSearchForm.priceRangePeriod) {
+      filters.push(`priceRangePeriod=${encodeURIComponent(this.homeSearchForm.priceRangePeriod)}`);
+    }
     if (this.homeSearchForm.includePrintInstall) {
       filters.push(`includePrintInstall=${encodeURIComponent(this.homeSearchForm.includePrintInstall)}`);
     }
@@ -163,6 +167,7 @@ export class HomeComponent implements OnInit {
       minHeight: null,
       minWidth: null,
       priceRange: null,
+      priceRangePeriod: null,
       includePrintInstall: false,
     };
     this.showMoreFilter = false;

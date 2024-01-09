@@ -51,7 +51,7 @@
                     </div>
                     <div class="explore__form-checkbox-list full-filter" [ngClass]="{'filter-block': showMoreFilter}">
                       <div class="row">
-                        <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0 ">
+                        <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0 ">
                           <div class="form-group bath">
                             <label class="item-bath">Size of Ad (Min. Height) </label>
                             <ng-select name="searchMinHeight" [searchable]="false" [(ngModel)]="homeSearchForm.minHeight" placeholder="Any">
@@ -61,7 +61,7 @@
                             </ng-select>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0 ">
+                        <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0 ">
                           <div class="form-group bath">
                             <label class="item-bath">Size of Ad (Min. Width) </label>
                             <ng-select name="searchMinWidth" [searchable]="false" [(ngModel)]="homeSearchForm.minWidth" placeholder="Any">
@@ -71,18 +71,28 @@
                             </ng-select>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 py-1 pl-0 pr-0">
+                        <div class="col-lg-3 col-md-6 py-1 pl-0 pr-0">
                           <div class="form-group garage">
                             <label class="item-garage">Price Range</label>
                             <ng-select name="searchPriceRange" [searchable]="false" [(ngModel)]="homeSearchForm.priceRange" placeholder="Any">
-                              <ng-option [value]="priceRangeValue.id" *ngFor="let priceRangeValue of rentPriceList">
+                              <ng-option [value]="priceRange" *ngFor="let priceRange of ['0-500','501-2000','2001-4000','4001-8000','8001-12000','12001-14000','14000+']">
+                                {{priceRange}}
+                              </ng-option>
+                            </ng-select>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 py-1 pl-0 pr-0">
+                          <div class="form-group garage">
+                            <label class="item-garage">Price Range Period</label>
+                            <ng-select name="searchPriceRangePeriod" [searchable]="false" [(ngModel)]="homeSearchForm.priceRangePeriod" placeholder="Any">
+                              <ng-option [value]="priceRangeValue.id" *ngFor="let priceRangeValue of rentPricePeriodList">
                                 {{priceRangeValue.name}}
                               </ng-option>
                             </ng-select>
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-lg-4 col-md-6 py-1 pl-0 pr-0">
+                          <div class="col-lg-3 col-md-6 py-1 pl-0 pr-0">
                             <div class="form-group garage">
                               <label class="item-garage">Including print and install?</label>
                               <ng-select name="searchIncludePrintInstall" [searchable]="false" [(ngModel)]="homeSearchForm.includePrintInstall" placeholder="Any">
@@ -91,12 +101,6 @@
                               </ng-select>
                             </div>
                           </div>
-                          <!-- <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0 ">
-                            <div class="form-group bath">
-                              <input id="includePrintInstall" class="checkbox-custom" name="includePrintInstall" type="checkbox" [(ngModel)]="homeSearchForm.includePrintInstall" />
-                              <label for="includePrintInstall" class="checkbox-custom-label no-select">Including print and install?</label>
-                            </div>
-                          </div> -->
                         </div>
                         <div class="filter-button">
                           <a href="javascript:;" (click)="applyFilter()" class="filter-btn1">Apply Filter</a>
