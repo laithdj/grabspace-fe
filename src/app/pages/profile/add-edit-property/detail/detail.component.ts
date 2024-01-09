@@ -17,13 +17,22 @@ export class DetailComponent implements OnInit {
   submitLoading: boolean;
   errors: any = {};
   ERROR_MESSAGES = CONSTANTS.ERROR_MESSAGES;
-  // amenitiesList = [
-  //   'TV Cable', 'Swimming Pool', 'Sauna',
-  //   'Air Conditioning', 'Laundry', 'Window Coverings',
-  //   'Barbeque', 'Microwave', 'CC Camera', 'Gym', 'Lawn'
-  // ]
-  amenitiesList = [];
-  floorPlans = [];
+  spaceTypeList = [
+    { id: 'Static', name: 'Static' },
+    { id: 'Digital', name: 'Digital' }
+  ];
+  spaceList = [
+    { id: 'Billboards', name: 'Billboards' },
+    { id: 'Bus Stops', name: 'Bus Stops' },
+    { id: 'Building wall', name: 'Building wall' },
+    { id: 'Moving Vehicles', name: 'Moving Vehicles' },
+  ];
+  rentPriceList = [
+    { id: 'Per week', name: 'Per week' },
+    { id: 'Per month', name: 'Per month' },
+    { id: 'Per year', name: 'Per year' },
+    { id: 'Per day', name: 'Per day' },
+  ];
 
   constructor(
     private router: Router,
@@ -34,7 +43,6 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {
     this.setupFormData();
     this.errors = {};
-    this.getAmenitiesList();
   }
   setupFormData() {
     const propertyDetails = this.propertyService.getFormValue().details;
@@ -47,105 +55,33 @@ export class DetailComponent implements OnInit {
     this.propertyForm = this.initialFormValues(propertyDetails);
   }
   initialFormValues(detailValues: any) {
-    this.setFloorPlan(detailValues?.floorPlans);
     return {
-      bedrooms: detailValues?.bedrooms || null,
-      bathrooms: detailValues?.bathrooms || null,
-      propertyAge: detailValues?.propertyAge || null,
-      landSize: detailValues?.landSize || '',
-      area: detailValues?.area || '',
-      salePrice: detailValues?.salePrice || null,
-      rentYield: detailValues?.rentYield || null,
-      weeklyCurrentRent: detailValues?.weeklyCurrentRent || null,
-      weeeklyRentalAppraisal: detailValues?.weeeklyRentalAppraisal || null,
-      propertyValueGrowth: detailValues?.propertyValueGrowth || null,
-      rentalMarketPrice: detailValues?.rentalMarketPrice || null,
-      vacancyRate: detailValues?.vacancyRate || null,
-      hideSalePrice: detailValues?.hideSalePrice || false,
-      parkingAvailable: detailValues?.parkingAvailable || false,
-      currentlyTenanted: detailValues?.currentlyTenanted || false,
-      fireZone: detailValues?.fireZone || false,
-      floodZone: detailValues?.floodZone || false,
-      landDAApproved: detailValues?.landDAApproved || false,
-      isBodyCorporate: detailValues?.isBodyCorporate || false,
-      bodyCorporateValue: detailValues?.bodyCorporateValue || null,
-      amenities: detailValues?.amenities || [],
-      floorPlans: detailValues?.floorPlans || [],
+      spaceType: detailValues?.spaceType || null,
+      adShowPerTime: detailValues?.adShowPerTime || null,
+      space: detailValues?.space || null,
+      sizeHeight: detailValues?.sizeHeight || null,
+      sizeWidth: detailValues?.sizeWidth || null,
+      rentPrice: detailValues?.rentPrice || null,
+      includePrintInstall: detailValues?.includePrintInstall || false,
+      traffic: detailValues?.traffic || false,
+      viewersPerDay: detailValues?.viewersPerDay || null,
     }
-  }
-  setFloorPlan(existingFloorPlans: any) {
-    console.log('existingFloorPlans', existingFloorPlans);
-    const floorPlanValue = {
-      title: '',
-      image: null,
-      imageSrc: ''
-    }
-    this.floorPlans = [];
-    if (existingFloorPlans && existingFloorPlans.length > 0) {
-      // if (this.propertyService.updateData?.id) {
-      //   for (const dbFloorValue of existingFloorPlans) {
-      //     const floorValueObj = {
-      //       title: dbFloorValue.title,
-      //       image: null,
-      //       imageSrc: dbFloorValue.imageName ? `${ backendurl }/${dbFloorValue.path}` : '',
-      //       _id: dbFloorValue._id
-      //     }
-      //     this.floorPlans.push(floorValueObj);
-      //   }
-      //   return;
-      // }
-      this.floorPlans = existingFloorPlans;
-      return;
-    }
-    this.floorPlans.push(floorPlanValue);
-  }
-  addFloorPlan(): void {
-    const floorPlanValue = {
-      title: '',
-      image: null,
-      imageSrc: ''
-    }
-    this.floorPlans.push(floorPlanValue);
-  }
-  removeFloorPlan(index: number): void {
-    this.floorPlans.splice(index, 1);
-  }
-  getAmenitiesList(): void {
-    this.propertyService.getAmenities().subscribe(amenitiesRes => {
-      if (amenitiesRes.length > 0) {
-        this.amenitiesList = amenitiesRes;
-      }
-    })
-  }
-  onSelectFile(event: any, floorData: any) {
-    if (!event.target?.files?.length) {
-      return;
-    }
-    const selectedFile = event.target?.files[0];
-    console.log('selectedFile', selectedFile);
-    const fileExt = selectedFile.name.split('.').pop();
-    if (['jpg', 'jpeg', 'png'].indexOf(fileExt) <= -1) {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: `Please upload only image file` });
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      floorData.imageSrc = e.target.result;
-      selectedFile._id = floorData._id || Date.now();
-      selectedFile.requestedFileName = selectedFile.name;
-      selectedFile.requestedFileSize = selectedFile.size;
-      selectedFile.requestedFileType = selectedFile.type;
-      floorData.image = selectedFile;
-    };
-    reader.readAsDataURL(selectedFile);
   }
 
   validateDetailsForm(): boolean {
     this.errors = {};
     if (this.submitted) {
+      const excludeRequiredFields = ['includePrintInstall','traffic'];
       Object.keys(this.propertyForm).forEach(field => {
-        if (['rentYield','weeklyCurrentRent','weeeklyRentalAppraisal','rentalMarketPrice','vacancyRate','hideSalePrice','parkingAvailable','currentlyTenanted',
-      'floodZone','fireZone','landDAApproved','isBodyCorporate','bodyCorporateValue'].indexOf(field) > -1) {
+        if (field === 'spaceType') {
+          if (!this.propertyForm.spaceType || this.propertyForm.spaceType != 'Digital') {
+            excludeRequiredFields.push('adShowPerTime');
+          }
+        }
+        if (field === 'traffic' && !this.propertyForm.traffic) {
+          excludeRequiredFields.push('viewersPerDay');
+        }
+        if (excludeRequiredFields.indexOf(field) > -1) {
           return;
         }
         if (!this.propertyForm[field]) {
@@ -159,22 +95,17 @@ export class DetailComponent implements OnInit {
     console.log('onSubmitDetails called.');
     this.submitted = true;
     const errors = this.validateDetailsForm();
-    console.log('errors', errors);
+    console.log('errors', errors, this.errors);
     if (!errors) {
       this.submitLoading = true;
-      if (this.floorPlans.length) {
-        this.propertyForm.floorPlans = this.floorPlans.filter(obj => obj.title || obj.image);
-      }
       this.propertyService.setFormValue('DETAILS', this.propertyForm);
-      const propertyFormNewValue = this.propertyService.getFormValue();
-      console.log('propertyFormNewValue.details', propertyFormNewValue.details);
       setTimeout(() => {
         if (this.propertyService.updateId) {
-          this.router.navigateByUrl(`/profile/edit-property/${this.propertyService.updateId}/images`);
+          this.router.navigateByUrl(`/profile/edit-listing/${this.propertyService.updateId}/images`);
           this.submitLoading = false;
           return;  
         }
-        this.router.navigateByUrl(`/profile/add-property/images`);
+        this.router.navigateByUrl(`/profile/add-listing/images`);
         this.submitLoading = false;
       }, 1000);
     }
@@ -182,10 +113,10 @@ export class DetailComponent implements OnInit {
 
   onPreviousPage(): void {
     if (this.propertyService.updateId) {
-      this.router.navigateByUrl(`/profile/edit-property/${this.propertyService.updateId}/general`);
+      this.router.navigateByUrl(`/profile/edit-listing/${this.propertyService.updateId}/general`);
       return;
     }
-    this.router.navigateByUrl(`/profile/add-property/general`);
+    this.router.navigateByUrl(`/profile/add-listing/general`);
   }
 
 }

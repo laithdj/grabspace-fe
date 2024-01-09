@@ -63,28 +63,26 @@ export class SellerDetailsComponent implements OnInit {
     console.log('onSubmitSellerDetails called.');
     this.submitted = true;
     const errors = this.validateSellerDetailsForm();
-    console.log('errors', errors);
+    console.log('errors', errors, this.errors);
     if (!errors) {
       this.submitLoading = true;
       this.propertyService.setFormValue('SELLER_DETAILS', this.propertyForm);
-      const propertyFormNewValue = this.propertyService.getFormValue();
-      console.log('propertyFormNewValue.sellerDetails', propertyFormNewValue.sellerDetails);
       if (this.propertyService.updateId && this.propertyService.updateData?.id) {
-        this.editProperty(this.propertyService.updateData.id);
+        this.editListing(this.propertyService.updateData.id);
         return;
       }
-      this.addProperty();
+      this.addListing();
       // setTimeout(() => {
       //   this.submitLoading = false;
       // }, 1000);
     }
   }
-  addProperty(): void {
+  addListing(): void {
     this.propertyService.createProperty().subscribe(
       (createRes: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Property added.' });
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Listing added.' });
         setTimeout(() => {
-          this.router.navigateByUrl(`/profile/my-properties`);
+          this.router.navigateByUrl(`/profile/my-listing`);
           this.resetPropertyForm();
           this.submitLoading = false;
         }, 1000);
@@ -99,12 +97,12 @@ export class SellerDetailsComponent implements OnInit {
       }
     )
   }
-  editProperty(propertyId): void {
-    this.propertyService.updateProperty(propertyId).subscribe(
+  editListing(listingId): void {
+    this.propertyService.updateProperty(listingId).subscribe(
       (createRes: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Property updated.' });
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Listing updated.' });
         setTimeout(() => {
-          this.router.navigateByUrl(`/profile/my-properties`);
+          this.router.navigateByUrl(`/profile/my-listing`);
           this.resetPropertyForm();
           this.submitLoading = false;
         }, 1000);
@@ -128,10 +126,10 @@ export class SellerDetailsComponent implements OnInit {
 
   onPreviousPage(): void {
     if (this.propertyService.updateId) {
-      this.router.navigateByUrl(`/profile/edit-property/${this.propertyService.updateId}/images`);
+      this.router.navigateByUrl(`/profile/edit-listing/${this.propertyService.updateId}/images`);
       return;
     }
-    this.router.navigateByUrl(`/profile/add-property/images`);
+    this.router.navigateByUrl(`/profile/add-listing/images`);
   }
 
 }

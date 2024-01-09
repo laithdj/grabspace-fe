@@ -7,7 +7,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">All Properties</li>
+        <li class="breadcrumb-item active" aria-current="page">All Listing</li>
       </ol>
     </nav>
   </div>
@@ -27,20 +27,12 @@
             <div class="row">
               <div class="col-lg-12 pl-15 mb-0">
                 <div class="rld-single-select">
-                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Property Type" name="searchType" [(ngModel)]="searchForm.type">
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Space" name="space" [(ngModel)]="searchForm.space">
                     <ng-option value="ALL">All Property Type</ng-option>
-                    <ng-option [value]="typeValue.id" *ngFor="let typeValue of propertyTypes">{{typeValue.type}}</ng-option>
+                    <ng-option [value]="spaceValue.id" *ngFor="let spaceValue of spaceList">{{spaceValue.name}}</ng-option>
                   </ng-select>
                 </div>
               </div>
-              <!-- <div class="col-lg-12 pl-15 mb-0">
-                <div class="rld-single-select">
-                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Category" name="searchCategory" [(ngModel)]="searchForm.category">
-                    <ng-option value="ALL">All Categories</ng-option>
-                    <ng-option [value]="statusValue.id" *ngFor="let statusValue of propertyStatusList">{{statusValue.status}}</ng-option>
-                  </ng-select>
-                </div>
-              </div> -->
               <div class="col-lg-12 pl-15">
                 <div class="rld-single-select">
                   <ng-select [clearable]="false" [searchable]="false" placeholder="Select City" name="searchCity" [(ngModel)]="searchForm.city">
@@ -51,32 +43,32 @@
               </div>
               <div class="col-lg-12 pl-15 mb-0">
                 <div class="rld-single-select">
-                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Bedroom" name="searchBedrooms" [(ngModel)]="searchForm.bedrooms">
-                    <ng-option value="ALL">Bedrooms</ng-option>
-                    <ng-option [value]="bed" *ngFor="let bed of ['1','2','3','4','4+']">{{bed}}</ng-option>
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Size of Ad (Min. Height)" name="searchMinHeight" [(ngModel)]="searchForm.minHeight">
+                    <ng-option value="ALL">Size of Ad (Min. Height)</ng-option>
+                    <ng-option [value]="height" *ngFor="let height of ['200','400','600','800','1000','1000+']">{{height}}</ng-option>
                   </ng-select>
                 </div>
               </div>
               <div class="col-lg-12 pl-15 mb-0">
                 <div class="rld-single-select">
-                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Bathrooms" name="searchBathrooms" [(ngModel)]="searchForm.bathrooms">
-                    <ng-option value="ALL">Bathrooms</ng-option>
-                    <ng-option [value]="bath" *ngFor="let bath of ['1','2','3','4','4+']">{{bath}}</ng-option>
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Size of Ad (Min. Width)" name="searchMinWidth" [(ngModel)]="searchForm.minWidth">
+                    <ng-option value="ALL">Size of Ad (Min. Width)</ng-option>
+                    <ng-option [value]="width" *ngFor="let width of ['200','400','600','800','1000','1000+']">{{width}}</ng-option>
                   </ng-select>
                 </div>
               </div>
               <div class="col-lg-12 pl-15 mb-0">
                 <div class="rld-single-select">
-                  <ng-select [clearable]="false" [searchable]="false" placeholder="Select Sale Price" name="searchSalePrice" [(ngModel)]="searchForm.salePrice">
-                    <ng-option value="ALL">Sale Price</ng-option>
-                    <ng-option [value]="salePrice" *ngFor="let salePrice of ['0-100','101-300','301-500','501-800','801-1000','1000+']">{{salePrice}}</ng-option>
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Price Range" name="searchPriceRange" [(ngModel)]="searchForm.priceRange">
+                    <ng-option value="ALL">Price Range</ng-option>
+                    <ng-option [value]="priceRangeValue.id" *ngFor="let priceRangeValue of rentPriceList">{{priceRangeValue.name}}</ng-option>
                   </ng-select>
                 </div>
               </div>
               <div class="col-lg-12 pl-15 mb-0">
                 <div class="rld-single-select">
-                  <ng-select [clearable]="false" [searchable]="false" placeholder="Land DA Approved?" name="searchLandApproved" [(ngModel)]="searchForm.landDAApproved">
-                    <ng-option value="ALL">Land DA Approved?</ng-option>
+                  <ng-select [clearable]="false" [searchable]="false" placeholder="Including print and install?" name="searchPrintInstall" [(ngModel)]="searchForm.includePrintInstall">
+                    <ng-option value="ALL">Including print and install?</ng-option>
                     <ng-option value="YES">Yes</ng-option>
                     <ng-option value="NO">No</ng-option>
                   </ng-select>
@@ -214,7 +206,7 @@
                       </div> -->
                     </div>
                     <div class="item-content item-content-property">
-                      <div class="item-category10"><a routerLink="/properties/{{pData.id}}">{{pData.propertyType}}</a></div>
+                      <!-- <div class="item-category10"><a routerLink="/properties/{{pData.id}}">{{pData.propertyType}}</a></div> -->
                       <!-- <div class="react-icon react-icon-2">
                         <ul>
                           <li>
@@ -233,14 +225,14 @@
                       <div class="verified-area">
                         <h3 class="item-title"><a routerLink="/properties/{{pData.id}}">{{pData.title}}</a></h3>
                       </div>
-                      <div class="location-area"><i class="flaticon-maps-and-flags"></i>{{pData.areaName}}, {{pData.city}}</div>
-                      <div class="item-categoery3">
+                      <div class="location-area"><i class="flaticon-maps-and-flags"></i>{{pData.city}}</div>
+                      <!-- <div class="item-categoery3">
                         <ul>
-                          <!-- <li><i class="flaticon-two-overlapping-square"></i>{{pData.propertyStatus}}</li> -->
-                          <!-- <li><i class="flaticon-shower"></i>Baths: 02</li>
-                          <li><i class="flaticon-two-overlapping-square"></i>931 Sqft</li> -->
+                          <li><i class="flaticon-two-overlapping-square"></i>{{pData.propertyStatus}}</li>
+                          <li><i class="flaticon-shower"></i>Baths: 02</li>
+                          <li><i class="flaticon-two-overlapping-square"></i>931 Sqft</li>
                         </ul>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>

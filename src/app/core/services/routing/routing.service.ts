@@ -20,12 +20,12 @@ export class RoutingService {
         // Show progress spinner or progress bar
         console.log('Route change detected', event.url);
         const noSpinnerRoutes = [
-          `/profile/add-property/general`,
-          `/profile/add-property/images`,
-          `/profile/add-property/details`,
-          `/profile/add-property/seller-details`,
+          `/profile/add-listing/general`,
+          `/profile/add-listing/images`,
+          `/profile/add-listing/details`,
+          `/profile/add-listing/seller-details`,
         ]
-        const routeInclude = event.url.includes('profile/edit-property');
+        const routeInclude = event.url.includes('profile/edit-listing');
         console.log('routeInclude', routeInclude);
         if (noSpinnerRoutes.indexOf(event.url) === -1 && !routeInclude) {
           this.startPreLoader();  

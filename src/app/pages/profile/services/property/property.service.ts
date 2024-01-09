@@ -79,15 +79,6 @@ export class PropertyService {
         formData.append("images", imageValue, imageValue.name);
       }
     }
-    if (propertyData.details.floorPlans?.length) {
-      for (const floorPlanValue of propertyData.details.floorPlans) {
-        if (!floorPlanValue.image?.name) {
-          continue;
-        }
-        delete floorPlanValue.imageSrc;
-        formData.append("floorPlanImages", floorPlanValue.image, floorPlanValue.image.name);
-      }
-    }
     formData.append('propertyData', JSON.stringify(propertyData));
     return this.http.post(`${baseurl}/property`, formData);
   }

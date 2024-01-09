@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
           }, loginRes.tokens?.access, loginRes.tokens?.refresh);
           this.messageService.add({ severity: 'success', summary: 'Success', detail: `Welcome Back! ${fullName}` });
           setTimeout(() => {
-            this.router.navigateByUrl(`/profile/my-properties`);
+            this.router.navigateByUrl(`/profile/my-listing`);
             this.resetLoginForm();
             this.submitLoading = false;
           }, 1000);

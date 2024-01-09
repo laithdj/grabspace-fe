@@ -122,7 +122,7 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
       return `${months} months old`;
     }
     const days = moment().diff(createdDate, 'days');
-    if (days > 0) {
+    if (days >= 0) {
       return `${days} days old`;
     }
     return ``;
@@ -154,37 +154,20 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
     // return;
     this.csvLoading = true;
     let csvContent = ``;
-    csvContent += `"Name","${this.details.title}"\n`;
-    csvContent += `"Type","${this.details.propertyType?.type || '-'}"\n`;
+    csvContent += `"Title","${this.details.title}"\n`;
     csvContent += `"City","${this.details.city?.name || '-'}"\n`;
-    csvContent += `"Area","${this.details.areaName || '-'}"\n`;
     csvContent += `"Address","${this.details.address || '-'}"\n`;
     csvContent += `"Description","${this.details.description || '-'}"\n`;
-    csvContent += `"Bedrooms","${this.details.bedrooms || '-'}"\n`;
-    csvContent += `"Bathrooms","${this.details.bathrooms || '-'}"\n`;
-    csvContent += `"Property Age","${this.details.propertyAge || '-'}"\n`;
-    csvContent += `"Land Size (In sqft.)","${this.details.landSize || '-'}"\n`;
-    csvContent += `"Area (In sqft.)","${this.details.area || '-'}"\n`;
-    const salePrice = this.details.hideSalePrice ? 'Contact Agent' : this.details.salePrice;
-    csvContent += `"Sale Price","${salePrice}"\n`;
-    csvContent += `"Rent Yeild","${this.details.rentYield || '-'}"\n`;
-    csvContent += `"Weekly Current Rent","${this.details.weeklyCurrentRent || '-'}"\n`;
-    csvContent += `"Weekly Rental Appraisal","${this.details.weeeklyRentalAppraisal || '-'}"\n`;
-    csvContent += `"Property Value Growth (%)","${this.details.propertyValueGrowth || '-'}"\n`;
-    csvContent += `"Rental Market Price","${this.details.rentalMarketPrice || '-'}"\n`;
-    csvContent += `"Vacancy Rate","${this.details.vacancyRate || '-'}"\n`;
-    csvContent += `"Parking Available?","${this.details.parkingAvailable ? 'Yes' : 'No'}"\n`;
-    csvContent += `"Currently Tenanted?","${this.details.currentlyTenanted ? 'Yes' : 'No'}"\n`;
-    csvContent += `"Is Flood Zone?","${this.details.floodZone ? 'Yes' : 'No'}"\n`;
-    csvContent += `"Is Fire Zone?","${this.details.fireZone ? 'Yes' : 'No'}"\n`;
-    csvContent += `"Is Land DA Approved?","${this.details.landDAApproved ? 'Yes' : 'No'}"\n`;
-    csvContent += `"Is Body Corporate?","${this.details.isBodyCorporate ? 'Yes' : 'No'}"\n`;
-    csvContent += `"Body Corporate Value?","${this.details.bodyCorporateValue || '-'}"\n`;
-    let amenities = '-';
-    if (this.details.amenities?.length) {
-      amenities = this.details.amenities.map(obj => obj.name).join(',')
-    }
-    csvContent += `"Features & Amenities","${amenities}"\n`;
+    csvContent += `"Space Type","${this.details.spaceType || '-'}"\n`;
+    const adShowPerTime = this.details.spaceType === 'Digital' && this.details.adShowPerTime ? this.details.adShowPerTime : '-';
+    csvContent += `"How long will ad show per time?	","${adShowPerTime}"\n`;
+    csvContent += `"Space","${this.details.space || '-'}"\n`;
+    csvContent += `"Size (Width x Height)	","${this.details.sizeWidth || '0'} x ${this.details.sizeHeight || '0'}"\n`;
+    csvContent += `"Rent Price","${this.details.rentPrice || '-'}"\n`;
+    csvContent += `"Including print and install?","${this.details.includePrintInstall ? 'Yes' : 'No'}"\n`;
+    csvContent += `"Traffic?","${this.details.traffic ? 'Yes' : 'No'}"\n`;
+    const viewersPerDay = this.details.traffic && this.details.viewersPerDay ? this.details.viewersPerDay : '-';
+    csvContent += `"How many viewers per day?","${viewersPerDay}"\n`;
     csvContent += `"Seller Full Name","${this.details.sellerName}"\n`;
     csvContent += `"Seller Email","${this.details.sellerEmail}"\n`;
     csvContent += `"Seller Contact Number","(+) ${this.details.sellerNumber}"\n`;
@@ -194,7 +177,7 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
     const url = window.URL.createObjectURL(blob);
 
     a.href = url;
-    a.download = 'property-csv.csv';
+    a.download = 'listing-csv.csv';
     a.click();
     window.URL.revokeObjectURL(url);
     a.remove();

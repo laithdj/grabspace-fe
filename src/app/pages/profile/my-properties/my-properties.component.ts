@@ -46,7 +46,7 @@ export class MyPropertiesComponent implements OnInit {
         this.propertyService.deleteProperty(pData.id).subscribe(
           (propDeleteRes: any) => {
             console.log('propDeleteRes', propDeleteRes);
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Property deleted.' });
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Listing deleted.' });
             this.getPropertyList()
           },
           (propDeleteErr: any) => {

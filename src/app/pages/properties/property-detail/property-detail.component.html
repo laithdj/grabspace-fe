@@ -8,7 +8,7 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
         <li class="breadcrumb-item">
-          <a routerLink="/properties">Properties</a>
+          <a routerLink="/properties">Listings</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
           {{details.title}}
@@ -32,12 +32,12 @@
                 <div class="item-categoery">{{details.propertyStatus?.status}}</div>
               </div>
             </div> -->
-            <div class="col-lg-12 col-md-12 justify-content-end">
+            <!-- <div class="col-lg-12 col-md-12 justify-content-end">
               <div class="single-list-price">
                 <ng-container *ngIf="details.hideSalePrice"> <span style="font-size: 20px;">For price: Contact Agent</span></ng-container>
                 <ng-container *ngIf="!details.hideSalePrice">${{details.salePrice}}</ng-container>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="row align-items-center">
             <div class="col-lg-8 col-md-12">
@@ -152,67 +152,6 @@
               </div>
             </div>
             <div class="single-listing-box1">
-              <div class="overview-area">
-                <h3 class="item-title">Overview</h3>
-                <div class="gallery-icon-box">
-                  <div class="item-icon-box">
-                    <div class="item-icon">
-                      <i class="flaticon-home"></i>
-                    </div>
-                    <ul class="item-number">
-                      <li>Type :</li>
-                      <li class="deep-clr">{{details.propertyType?.type}}</li>
-                    </ul>
-                  </div>
-                  <div class="item-icon-box">
-                    <div class="item-icon">
-                      <i class="flaticon-bed"></i>
-                    </div>
-                    <ul class="item-number">
-                      <li>Bed Room :</li>
-                      <li class="deep-clr">{{details.bedrooms}}</li>
-                    </ul>
-                  </div>
-                  <div class="item-icon-box">
-                    <div class="item-icon">
-                      <i class="flaticon-home"></i>
-                    </div>
-                    <ul class="item-number">
-                      <li>Area :</li>
-                      <li class="deep-clr">{{details.area}} sqft</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="gallery-icon-box">     
-                  <div class="item-icon-box">
-                    <div class="item-icon">
-                      <i class="flaticon-home"></i>
-                    </div>
-                    <ul class="item-number">
-                      <li>Parking :</li>
-                      <li class="deep-clr">{{details.parkingAvailable ? 'Yes' : 'No'}}</li>
-                    </ul>
-                  </div>             
-                  <div class="item-icon-box">
-                    <div class="item-icon">
-                      <i class="flaticon-pencil"></i>
-                    </div>
-                    <ul class="item-number">
-                      <li>Land Size :</li>
-                      <li class="deep-clr">{{details.landSize}} sqft</li>
-                    </ul>
-                  </div>
-                  <div class="item-icon-box">
-                    <div class="item-icon">
-                      <i class="flaticon-two-overlapping-square"></i>
-                    </div>
-                    <ul class="item-number">
-                      <li>Age :</li>
-                      <li class="deep-clr">{{details.propertyAge}}</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
               <div class="overview-area listing-area mt-3">
                 <h3 class="item-title">About</h3>
                 <p>
@@ -223,83 +162,35 @@
                 <h3 class="item-title">Details</h3>
                 <table class="table-box1">
                   <tr>
-                    <td class="item-bold">Property Type</td>
-                    <td>{{details.propertyType?.type}}</td>
-                    <td class="item-bold">Price</td>
+                    <td class="item-bold">Space Type</td>
+                    <td>{{details.spaceType}}</td>
+                    <td class="item-bold">How long will ad show per time?</td>
                     <td>
-                      <ng-container *ngIf="details.hideSalePrice">Contact Agent</ng-container>
-                      <ng-container *ngIf="!details.hideSalePrice">${{details.salePrice}}</ng-container>
+                      <ng-container *ngIf="details.spaceType === 'Digital' && details.adShowPerTime; else noData">{{details.adShowPerTime}}</ng-container>
                     </td>
                   </tr>
                   <tr>
-                    <td class="item-bold">Rooms</td>
-                    <td>{{details.bedrooms}}</td>
-                    <td class="item-bold">Bathrooms</td>
-                    <td>{{details.bathrooms}}</td>
+                    <td class="item-bold">Space</td>
+                    <td>{{details.space}}</td>
+                    <td class="item-bold">Size (Width x Height)</td>
+                    <td>{{details.sizeWidth || '0'}} x {{details.sizeHeight || '0'}}</td>
                   </tr>
                   <tr>
-                    <td class="item-bold">Land Area</td>
-                    <td>{{details.area}} sqft</td>
-                    <td class="item-bold">Size</td>
-                    <td>{{details.landSize}} sqft</td>
+                    <td class="item-bold">Rent Price</td>
+                    <td>{{details.rentPrice}}</td>
+                    <td class="item-bold">Including print and install?</td>
+                    <td>{{details.includePrintInstall ? 'Yes' : 'No'}}</td>
                   </tr>
                   <tr>
-                    <td class="item-bold">Parking</td>
-                    <td>{{details.parkingAvailable ? 'Yes' : 'No'}}</td>
-                    <td class="item-bold">Age</td>
-                    <td>{{details.propertyAge}}</td>
+                    <td class="item-bold">Traffic?</td>
+                    <td>{{details.traffic ? 'Yes' : 'No'}}</td>
+                    <td class="item-bold">How many viewers per day?</td>
+                    <td>
+                      <ng-container *ngIf="details.traffic && details.viewersPerDay; else noData">{{details.viewersPerDay}}</ng-container>
+                    </td>
                   </tr>
-                  <tr>
-                    <td class="item-bold">Currently Tenanted?</td>
-                    <td>{{details.currentlyTenanted ? 'Yes' : 'No'}}</td>
-                    <td class="item-bold">Land DA Approved?</td>
-                    <td>{{details.landDAApproved ? 'Yes' : 'No'}}</td>
-                  </tr>
-                  <tr>
-                    <td class="item-bold">Flood Zone?</td>
-                    <td>{{details.floodZone ? 'Yes' : 'No'}}</td>
-                    <td class="item-bold">Fire Zone?</td>
-                    <td>{{details.fireZone ? 'Yes' : 'No'}}</td>
-                  </tr>
-                  <tr>
-                    <td class="item-bold">Is Body Corporate?</td>
-                    <td>{{details.isBodyCorporate ? 'Yes' : 'No'}}</td>
-                    <td class="item-bold">Body Corporate Value</td>
-                    <td>{{details.isBodyCorporate && details.bodyCorporateValue ? details.bodyCorporateValue : '-'}}</td>
-                  </tr>
+                  <ng-template #noData>-</ng-template>
                 </table>
-              </div>
-              <div class="overview-area ameniting-box mt-3">
-                <h3 class="item-title">Features & Amenities</h3>
-                <div class="row">
-                  <div class="col-lg-3" *ngFor="let amenityValue of details.amenities">
-                    <ul class="ameniting-list">
-                      <li >
-                        <i class="fas fa-check-circle"></i>{{amenityValue.name}}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="overview-area floor-plan-box mt-3" *ngIf="details.floorPlans?.length">
-                <h3 class="item-title">Floor Plans</h3>
-                <div id="accordion" class="accordion">
-                  <div class="card" *ngFor="let floorValue of details.floorPlans">
-                    <div class="card-header">
-                      <div class="heading-title" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                        aria-expanded="true" role="button">
-                        <span>{{floorValue.title}}</span>
-                      </div>
-                    </div>
-                    <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
-                      <div class="card-body">
-                        <div class="item-img">
-                          <img [src]="backendurl + '/' + floorValue.path" alt="shape" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

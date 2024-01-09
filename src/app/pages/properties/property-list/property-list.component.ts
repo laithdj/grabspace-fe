@@ -17,23 +17,31 @@ export class PropertyListComponent implements OnInit {
   propertyList: Array<{
     id: string;
     title: string;
-    propertyType: string;
     image: string;
-    propertyStatus: string;
-    areaName: string;
     city: string;
   }> = [];
   priceRangeFilter = null;
   searchForm = {
     title: '',
-    type: 'ALL',
-    category: 'ALL',
+    space: 'ALL',
     city: 'ALL',
-    salePrice: 'ALL',
-    bedrooms: 'ALL',
-    bathrooms: 'ALL',
-    landDAApproved: 'ALL'
+    minHeight: 'ALL',
+    minWidth: 'ALL',
+    priceRange: 'ALL',
+    includePrintInstall: 'ALL',
   };
+  spaceList = [
+    { id: 'Billboards', name: 'Billboards' },
+    { id: 'Bus Stops', name: 'Bus Stops' },
+    { id: 'Building wall', name: 'Building wall' },
+    { id: 'Moving Vehicles', name: 'Moving Vehicles' },
+  ];
+  rentPriceList = [
+    { id: 'Per week', name: 'Per week' },
+    { id: 'Per month', name: 'Per month' },
+    { id: 'Per year', name: 'Per year' },
+    { id: 'Per day', name: 'Per day' },
+  ];
   propertyTypes = [];
   propertyStatusList = [];
   cityList = [];
@@ -51,8 +59,8 @@ export class PropertyListComponent implements OnInit {
       this.getPropertyList(filterData);
       
       // this.loadPriceRangeFilter();
-      this.getPropertyTypesList();
-      this.getPropertyStatusList();
+      // this.getPropertyTypesList();
+      // this.getPropertyStatusList();
       this.getCityList();
     })
   }
@@ -95,50 +103,44 @@ export class PropertyListComponent implements OnInit {
     if (query.title) {
       filterValues.title = query.title;
     }
-    if (query.type) {
-      filterValues.typeId = query.type;
-    }
-    if (query.category) {
-      filterValues.statusId = query.category;
+    if (query.space) {
+      filterValues.space = query.space;
     }
     if (query.city) {
       filterValues.cityId = query.city;
     }
-    if (query.landDAApproved) {
-      filterValues.landDAApproved = query.landDAApproved;
+    if (query.minHeight) {
+      filterValues.minHeight = query.minHeight;
     }
-    if (query.bedrooms) {
-      filterValues.bedrooms = query.bedrooms;
+    if (query.minWidth) {
+      filterValues.minWidth = query.minWidth;
     }
-    if (query.bathrooms) {
-      filterValues.bathrooms = query.bathrooms;
+    if (query.priceRange) {
+      filterValues.priceRange = query.priceRange;
     }
-    if (query.salePrice) {
-      filterValues.salePrice = query.salePrice;
-    }
-    if (query.amenities) {
-      filterValues.amenities = query.amenities.split('|');
+    if (query.includePrintInstall) {
+      filterValues.includePrintInstall = query.includePrintInstall;
     }
     return filterValues;
   }
-  getPropertyTypesList(): void {
-    this.propertyService.getPropertyTypes().subscribe(typeRes => {
-      if (typeRes.length > 0) {
-        this.propertyTypes = typeRes;
-        setTimeout(() => {
-          $("select.property-type").niceSelect();
-        }, 100);
+  // getPropertyTypesList(): void {
+  //   this.propertyService.getPropertyTypes().subscribe(typeRes => {
+  //     if (typeRes.length > 0) {
+  //       this.propertyTypes = typeRes;
+  //       setTimeout(() => {
+  //         $("select.property-type").niceSelect();
+  //       }, 100);
 
-      }
-    })
-  }
-  getPropertyStatusList(): void {
-    this.propertyService.getPropertyStatus().subscribe(statusRes => {
-      if (statusRes.length > 0) {
-        this.propertyStatusList = statusRes;
-      }
-    })
-  }
+  //     }
+  //   })
+  // }
+  // getPropertyStatusList(): void {
+  //   this.propertyService.getPropertyStatus().subscribe(statusRes => {
+  //     if (statusRes.length > 0) {
+  //       this.propertyStatusList = statusRes;
+  //     }
+  //   })
+  // }
   getCityList(): void {
     this.propertyService.getCities().subscribe(cityRes => {
       if (cityRes.length > 0) {
@@ -146,11 +148,11 @@ export class PropertyListComponent implements OnInit {
       }
     })
   }
-  // getPropertyList(filterData?: { title: string; typeId: string; statusId: string; cityId: string; landDAApproved?: string; bedrooms?: string; amenities?: Array<string> }) {
   getPropertyList(filterData?: any) {
     this.isListLoading = true;
     this.propertyList = [];
     const postData = typeof filterData !== 'undefined' ? filterData : {};
+    console.log('postData', postData);
     this.propertyService.getProperties(postData).subscribe(
       (propRes: any) => {
         if (propRes.length) {
@@ -162,10 +164,7 @@ export class PropertyListComponent implements OnInit {
             this.propertyList.push({
               id: propValue.id,
               title: propValue.title,
-              propertyType: propValue.propertyType?.type,
               image: imageSrc,
-              propertyStatus: propValue.propertyStatus?.status,
-              areaName: propValue.areaName,
               city: propValue.city?.name,
             })
           }
@@ -189,36 +188,23 @@ export class PropertyListComponent implements OnInit {
     if (this.searchForm.title) {
       dataToSend.title = this.searchForm.title;
     }
-    if (this.searchForm.type !== 'ALL') {
-      dataToSend.typeId = this.searchForm.type;
-    }
-    if (this.searchForm.category !== 'ALL') {
-      dataToSend.statusId = this.searchForm.category;
+    if (this.searchForm.space !== 'ALL') {
+      dataToSend.space = this.searchForm.space;
     }
     if (this.searchForm.city !== 'ALL') {
       dataToSend.cityId = this.searchForm.city;
     }
-    // searchForm = {
-    //   title: '',
-    //   type: 'ALL',
-    //   category: 'ALL',
-    //   city: 'ALL',
-    //   salePrice: 'ALL',
-    //   bedrooms: 'ALL',
-    //   bathrooms: 'ALL',
-    //   landDAApproved: 'ALL'
-    // };
-    if (this.searchForm.salePrice !== 'ALL') {
-      dataToSend.salePrice = this.searchForm.salePrice;
+    if (this.searchForm.minHeight !== 'ALL') {
+      dataToSend.minHeight = this.searchForm.minHeight;
     }
-    if (this.searchForm.bedrooms !== 'ALL') {
-      dataToSend.bedrooms = this.searchForm.bedrooms;
+    if (this.searchForm.minWidth !== 'ALL') {
+      dataToSend.minWidth = this.searchForm.minWidth;
     }
-    if (this.searchForm.bathrooms !== 'ALL') {
-      dataToSend.bathrooms = this.searchForm.bathrooms;
+    if (this.searchForm.priceRange !== 'ALL') {
+      dataToSend.priceRange = this.searchForm.priceRange;
     }
-    if (this.searchForm.landDAApproved !== 'ALL') {
-      dataToSend.landDAApproved = this.searchForm.landDAApproved;
+    if (this.searchForm.includePrintInstall !== 'ALL') {
+      dataToSend.includePrintInstall = this.searchForm.includePrintInstall;
     }
     this.getPropertyList(dataToSend);
   }

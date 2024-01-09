@@ -14,11 +14,11 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
-    path: 'my-properties',
+    path: 'my-listing',
     component: MyPropertiesComponent
   },
   {
-    path: 'add-property',
+    path: 'add-listing',
     component: AddEditPropertyComponent,
     children: [
       {
@@ -45,7 +45,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'edit-property/:id',
+    path: 'edit-listing/:id',
     component: AddEditPropertyComponent,
     children: [
       {

@@ -25,9 +25,9 @@
                         <input type="text" name="searchTitle" [(ngModel)]="homeSearchForm.title" placeholder="Enter Keyword here...">
                       </div>
                       <div class="rld-single-select item ml-22">
-                        <ng-select name="searchType" [searchable]="false" [(ngModel)]="homeSearchForm.type" placeholder="Property Type">
-                          <ng-option [value]="typeValue.id" *ngFor="let typeValue of propertyTypes">
-                            {{typeValue.type}}
+                        <ng-select name="searchSpace" [searchable]="false" [(ngModel)]="homeSearchForm.space" placeholder="Space">
+                          <ng-option [value]="spaceValue.id" *ngFor="let spaceValue of spaceList">
+                            {{spaceValue.name}}
                           </ng-option>
                         </ng-select>
                       </div>
@@ -53,58 +53,50 @@
                       <div class="row">
                         <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0 ">
                           <div class="form-group bath">
-                            <label class="item-bath">Bedrooms</label>
-                            <ng-select name="searchBedrooms" [searchable]="false" [(ngModel)]="homeSearchForm.bedrooms" placeholder="Any">
-                              <ng-option [value]="bed" *ngFor="let bed of ['1','2','3','4','4+']">
-                                {{bed}}
+                            <label class="item-bath">Size of Ad (Min. Height) </label>
+                            <ng-select name="searchMinHeight" [searchable]="false" [(ngModel)]="homeSearchForm.minHeight" placeholder="Any">
+                              <ng-option [value]="height" *ngFor="let height of ['200','400','600','800','1000','1000+']">
+                                {{height}}
                               </ng-option>
                             </ng-select>
                           </div>
                         </div>
                         <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0 ">
                           <div class="form-group bath">
-                            <label class="item-bath">Bathrooms</label>
-                            <ng-select name="searchBathrooms" [searchable]="false" [(ngModel)]="homeSearchForm.bathrooms" placeholder="Any">
-                              <ng-option [value]="bath" *ngFor="let bath of ['1','2','3','4','4+']">
-                                {{bath}}
+                            <label class="item-bath">Size of Ad (Min. Width) </label>
+                            <ng-select name="searchMinWidth" [searchable]="false" [(ngModel)]="homeSearchForm.minWidth" placeholder="Any">
+                              <ng-option [value]="width" *ngFor="let width of ['200','400','600','800','1000','1000+']">
+                                {{width}}
                               </ng-option>
                             </ng-select>
                           </div>
                         </div>
                         <div class="col-lg-4 col-md-6 py-1 pl-0 pr-0">
                           <div class="form-group garage">
-                            <label class="item-garage">Land DA Approved?</label>
-                            <ng-select name="searchLandDAApproved" [searchable]="false" [(ngModel)]="homeSearchForm.landDAApproved" placeholder="Any">
-                              <ng-option value="YES">Yes</ng-option>
-                              <ng-option value="NO">No</ng-option>
+                            <label class="item-garage">Price Range</label>
+                            <ng-select name="searchPriceRange" [searchable]="false" [(ngModel)]="homeSearchForm.priceRange" placeholder="Any">
+                              <ng-option [value]="priceRangeValue.id" *ngFor="let priceRangeValue of rentPriceList">
+                                {{priceRangeValue.name}}
+                              </ng-option>
                             </ng-select>
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0 ">
-                            <div class="form-group bath">
-                              <label class="item-bath">Sale Price</label>
-                              <ng-select name="searchSalePrice" [searchable]="false" [(ngModel)]="homeSearchForm.salePrice" placeholder="Any">
-                                <ng-option [value]="salePrice" *ngFor="let salePrice of ['0-100','101-300','301-500','501-800','801-1000','1000+']">
-                                  {{salePrice}}
-                                </ng-option>
+                          <div class="col-lg-4 col-md-6 py-1 pl-0 pr-0">
+                            <div class="form-group garage">
+                              <label class="item-garage">Including print and install?</label>
+                              <ng-select name="searchIncludePrintInstall" [searchable]="false" [(ngModel)]="homeSearchForm.includePrintInstall" placeholder="Any">
+                                <ng-option value="YES">Yes</ng-option>
+                                <ng-option value="NO">No</ng-option>
                               </ng-select>
                             </div>
                           </div>
-                        </div>
-
-                        <div class="row" *ngIf="amenitiesList?.length">
-
-                          <div class="col-lg-12 col-md-12 col-sm-12">
-                            <h4 class="text-dark">Amenities</h4>
-                            <ul class="no-ul-list third-row">
-                              <li *ngFor="let amenityValue of amenitiesList; let i = index">
-                                <input [id]="'a-'+ i" class="checkbox-custom" [name]="'a-'+ i" type="checkbox" [checked]="amenityValue.isChecked" [(ngModel)]="amenityValue.isChecked" (change)="onChangeSearchAmenity(amenityValue.isChecked, amenityValue.id)">
-                                <label [for]="'a-'+ i" class="checkbox-custom-label">{{amenityValue.name}}</label>
-                              </li>
-                            </ul>
-                          </div>
-
+                          <!-- <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0 ">
+                            <div class="form-group bath">
+                              <input id="includePrintInstall" class="checkbox-custom" name="includePrintInstall" type="checkbox" [(ngModel)]="homeSearchForm.includePrintInstall" />
+                              <label for="includePrintInstall" class="checkbox-custom-label no-select">Including print and install?</label>
+                            </div>
+                          </div> -->
                         </div>
                         <div class="filter-button">
                           <a href="javascript:;" (click)="applyFilter()" class="filter-btn1">Apply Filter</a>

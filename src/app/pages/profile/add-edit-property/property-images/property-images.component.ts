@@ -132,27 +132,24 @@ export class PropertyImagesComponent implements OnInit {
     }
     this.submitted = true;
     this.submitLoading = true;
-    console.log('this.propertyImages', this.propertyImages);
     this.propertyService.setFormValue('IMAGES', this.propertyImages);
-    const propertyFormNewValue = this.propertyService.getFormValue();
-    console.log('propertyFormNewValue.images', propertyFormNewValue.images);
     setTimeout(() => {
       if (this.propertyService.updateId) {
-        this.router.navigateByUrl(`/profile/edit-property/${this.propertyService.updateId}/seller-details`);
+        this.router.navigateByUrl(`/profile/edit-listing/${this.propertyService.updateId}/seller-details`);
         this.submitLoading = false;
         return;
       }
-      this.router.navigateByUrl(`/profile/add-property/seller-details`);
+      this.router.navigateByUrl(`/profile/add-listing/seller-details`);
       this.submitLoading = false;
     }, 1000);
   }
 
   onPreviousPage(): void {
     if (this.propertyService.updateId) {
-      this.router.navigateByUrl(`/profile/edit-property/${this.propertyService.updateId}/details`);
+      this.router.navigateByUrl(`/profile/edit-listing/${this.propertyService.updateId}/details`);
       return;
     }
-    this.router.navigateByUrl(`/profile/add-property/details`);
+    this.router.navigateByUrl(`/profile/add-listing/details`);
   }
 
 }

@@ -12,20 +12,27 @@ declare var TweenMax: any;
 })
 export class HomeComponent implements OnInit {
 
-  propertyTypes = [];
-  propertyStatusList = [];
   cityList = [];
-  amenitiesList = [];
+  spaceList = [
+    { id: 'Billboards', name: 'Billboards' },
+    { id: 'Bus Stops', name: 'Bus Stops' },
+    { id: 'Building wall', name: 'Building wall' },
+    { id: 'Moving Vehicles', name: 'Moving Vehicles' },
+  ];
+  rentPriceList = [
+    { id: 'Per week', name: 'Per week' },
+    { id: 'Per month', name: 'Per month' },
+    { id: 'Per year', name: 'Per year' },
+    { id: 'Per day', name: 'Per day' },
+  ];
   homeSearchForm = {
     title: '',
-    type: null,
+    space: null,
     city: null,
-    category: null,
-    bedrooms: null,
-    bathrooms: null,
-    salePrice: null,
-    landDAApproved: null,
-    amenities: []
+    minHeight: null,
+    minWidth: null,
+    priceRange: null,
+    includePrintInstall: null,
   };
   showMoreFilter = false;
 
@@ -35,10 +42,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getPropertyTypesList();
-    this.getPropertyStatusList();
     this.getCityList();
-    this.getAmenitiesList();
   }
   ngAfterViewInit() {
     $("select").niceSelect();
@@ -106,49 +110,12 @@ export class HomeComponent implements OnInit {
       y: ((relY - $wrap.height() / 2) / $wrap.height()) * movement,
     });
   }
-  getPropertyTypesList(): void {
-    this.propertyService.getPropertyTypes().subscribe(typeRes => {
-      if (typeRes.length > 0) {
-        this.propertyTypes = typeRes;
-
-      }
-    })
-  }
-  getPropertyStatusList(): void {
-    this.propertyService.getPropertyStatus().subscribe(statusRes => {
-      if (statusRes.length > 0) {
-        this.propertyStatusList = statusRes;
-      }
-    })
-  }
   getCityList(): void {
     this.propertyService.getCities().subscribe(cityRes => {
       if (cityRes.length > 0) {
         this.cityList = cityRes;
       }
     })
-  }
-  getAmenitiesList(): void {
-    this.propertyService.getAmenities().subscribe(amenitiesRes => {
-      if (amenitiesRes.length > 0) {
-        this.amenitiesList = amenitiesRes.map(obj => {
-          obj.isChecked = false;
-          return obj;
-        });
-      }
-    })
-  }
-  onChangeSearchAmenity(isChecked: boolean, amenityId: string) {
-    console.log('onChangeSearchAmenity called.', isChecked, amenityId);
-    const existingIndex = this.homeSearchForm.amenities.indexOf(amenityId);
-    if (isChecked && existingIndex <= -1) {
-      this.homeSearchForm.amenities.push(amenityId);
-      return;
-    }
-    if (!isChecked && existingIndex > -1) {
-      this.homeSearchForm.amenities.splice(existingIndex, 1);
-      return;
-    }
   }
   onSearchHome() {
     console.log('this.homeSearchForm', this.homeSearchForm);
@@ -157,30 +124,25 @@ export class HomeComponent implements OnInit {
     if (this.homeSearchForm.title) {
       filters.push(`title=${encodeURIComponent(this.homeSearchForm.title)}`);
     }
-    if (this.homeSearchForm.type) {
-      filters.push(`type=${encodeURIComponent(this.homeSearchForm.type)}`);
+    if (this.homeSearchForm.space) {
+      filters.push(`space=${encodeURIComponent(this.homeSearchForm.space)}`);
     }
     if (this.homeSearchForm.city) {
       filters.push(`city=${encodeURIComponent(this.homeSearchForm.city)}`);
     }
-    if (this.homeSearchForm.category) {
-      filters.push(`category=${encodeURIComponent(this.homeSearchForm.category)}`);
+    if (this.homeSearchForm.minHeight) {
+      filters.push(`minHeight=${encodeURIComponent(this.homeSearchForm.minHeight)}`);
     }
-    if (this.homeSearchForm.bedrooms) {
-      filters.push(`bedrooms=${encodeURIComponent(this.homeSearchForm.bedrooms)}`);
+    if (this.homeSearchForm.minWidth) {
+      filters.push(`minWidth=${encodeURIComponent(this.homeSearchForm.minWidth)}`);
     }
-    if (this.homeSearchForm.landDAApproved) {
-      filters.push(`landDAApproved=${encodeURIComponent(this.homeSearchForm.landDAApproved)}`);
+    if (this.homeSearchForm.priceRange) {
+      filters.push(`priceRange=${encodeURIComponent(this.homeSearchForm.priceRange)}`);
     }
-    if (this.homeSearchForm.amenities?.length) {
-      filters.push(`amenities=${this.homeSearchForm.amenities.join('|')}`);
+    if (this.homeSearchForm.includePrintInstall) {
+      filters.push(`includePrintInstall=${encodeURIComponent(this.homeSearchForm.includePrintInstall)}`);
     }
-    if (this.homeSearchForm.bathrooms) {
-      filters.push(`bathrooms=${encodeURIComponent(this.homeSearchForm.bathrooms)}`);
-    }
-    if (this.homeSearchForm.salePrice) {
-      filters.push(`salePrice=${encodeURIComponent(this.homeSearchForm.salePrice)}`);
-    }
+   
     if (filters.length) {
       filterURL += `?${filters.join('&')}`;
     }
@@ -196,20 +158,13 @@ export class HomeComponent implements OnInit {
   clearFilter() {
     this.homeSearchForm = {
       title: '',
-      type: null,
+      space: null,
       city: null,
-      category: null,
-      bedrooms: null,
-      bathrooms: null,
-      salePrice: null,
-      landDAApproved: null,
-      amenities: []
+      minHeight: null,
+      minWidth: null,
+      priceRange: null,
+      includePrintInstall: false,
     };
-    if (this.amenitiesList?.length) {
-      this.amenitiesList.forEach(amenity => {
-        amenity.isChecked = false;
-      })
-    }
     this.showMoreFilter = false;
   }
 }

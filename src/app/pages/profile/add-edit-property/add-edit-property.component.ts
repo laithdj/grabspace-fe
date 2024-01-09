@@ -62,50 +62,22 @@ export class AddEditPropertyComponent implements OnInit {
           this.propertyService.updateId = propRes.id;
           this.propertyService.updateData = propRes;
           const generalDetails = {
-            type: propRes.propertyType,
             title: propRes.title,
-            areaName: propRes.areaName,
             city: propRes.city,
             address: propRes.address,
             description: propRes.description,
-            propertyStatus: propRes.propertyStatus,
           }
           this.propertyService.setFormValue('GENERAL', generalDetails);
           const propertyDetais = {
-            bedrooms: propRes.bedrooms || null,
-            bathrooms: propRes.bathrooms || null,
-            propertyAge: propRes.propertyAge || null,
-            landSize: propRes.landSize || '',
-            area: propRes.area || '',
-            salePrice: propRes.salePrice || null,
-            rentYield: propRes.rentYield || null,
-            weeklyCurrentRent: propRes.weeklyCurrentRent || null,
-            weeeklyRentalAppraisal: propRes.weeeklyRentalAppraisal || null,
-            propertyValueGrowth: propRes.propertyValueGrowth || null,
-            rentalMarketPrice: propRes.rentalMarketPrice || null,
-            vacancyRate: propRes.vacancyRate || null,
-            hideSalePrice: propRes.hideSalePrice || false,
-            parkingAvailable: propRes.parkingAvailable || false,
-            currentlyTenanted: propRes.currentlyTenanted || false,
-            fireZone: propRes.fireZone || false,
-            floodZone: propRes.floodZone || false,
-            landDAApproved: propRes.landDAApproved || false,
-            isBodyCorporate: propRes.isBodyCorporate || false,
-            bodyCorporateValue: propRes.bodyCorporateValue || null,
-            amenities: propRes.amenities || [],
-            floorPlans: [],
-          }
-          if (propRes.floorPlans?.length > 0) {
-            propertyDetais.floorPlans = [];
-            for (const dbFloorValue of propRes.floorPlans) {
-              const floorValueObj = {
-                title: dbFloorValue.title,
-                image: null,
-                imageSrc: dbFloorValue.imageName ? `${ backendurl }/${dbFloorValue.path}` : '',
-                _id: dbFloorValue._id
-              }
-              propertyDetais.floorPlans.push(floorValueObj);
-            }
+            spaceType: propRes.spaceType || null,
+            adShowPerTime: propRes.adShowPerTime || null,
+            space: propRes.space || null,
+            sizeHeight: propRes.sizeHeight || null,
+            sizeWidth: propRes.sizeWidth || null,
+            rentPrice: propRes.rentPrice || null,
+            includePrintInstall: propRes.includePrintInstall || false,
+            traffic: propRes.traffic || false,
+            viewersPerDay: propRes.viewersPerDay || null,
           }
           this.propertyService.setFormValue('DETAILS', propertyDetais);
           const propertyImages = propRes.images?.length ? propRes.images : [];
