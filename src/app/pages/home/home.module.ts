@@ -5,6 +5,8 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
+
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     NgSelectModule,
+    CalendarModule,
+    
     HomeRoutingModule
   ]
 })
