@@ -18,14 +18,14 @@
       <label class="control-label">
         Space Size (Width) <strong class="rtcl-required">*</strong>
       </label>
-      <input type="text" name="sizeWidth" class="form-control" [(ngModel)]="propertyForm.sizeWidth" />
+      <input type="number" name="sizeWidth" class="form-control" [(ngModel)]="propertyForm.sizeWidth" />
       <div class="error" *ngIf="submitted && !propertyForm.sizeWidth">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
     </div>
     <div class="form-group col-3" [ngClass]="{'with-error': submitted && !propertyForm.sizeHeight}">
       <label class="control-label">
         Space Size (Height) <strong class="rtcl-required">*</strong>
       </label>
-      <input type="text" name="sizeHeight" class="form-control" [(ngModel)]="propertyForm.sizeHeight" />
+      <input type="number" name="sizeHeight" class="form-control" [(ngModel)]="propertyForm.sizeHeight" />
       <div class="error" *ngIf="submitted && !propertyForm.sizeHeight">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
     </div>
   </div>
@@ -34,7 +34,7 @@
       <label class="control-label">
         How long will ad show per time? <strong class="rtcl-required">*</strong>
       </label>
-      <input type="text" name="adShowPerTime" class="form-control" [(ngModel)]="propertyForm.adShowPerTime" />
+      <input type="number" name="adShowPerTime" class="form-control" [(ngModel)]="propertyForm.adShowPerTime" />
       <div class="error" *ngIf="submitted && errors.adShowPerTime">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
     </div>
     <div class="form-group col-3" [ngClass]="{'with-error': submitted && !propertyForm.rentPrice}">
@@ -42,7 +42,7 @@
         Rent Price <strong class="rtcl-required">*</strong>
       </label>
       <!-- <ng-select [(ngModel)]="propertyForm.rentPrice" name="rentPrice" [items]="rentPriceList" bindValue="id" bindLabel="name" [multiple]="false" [searchable]="false" [clearable]="false"></ng-select> -->
-      <input type="text" name="rentPrice" class="form-control" [(ngModel)]="propertyForm.rentPrice" />
+      <input type="number" name="rentPrice" class="form-control" [(ngModel)]="propertyForm.rentPrice" />
       <div class="error" *ngIf="submitted && !propertyForm.rentPrice">{{ERROR_MESSAGES.FIELD_REQUIRED}}</div>
     </div>
     <div class="form-group col-3" [ngClass]="{'with-error': submitted && !propertyForm.rentPricePeriod}">
