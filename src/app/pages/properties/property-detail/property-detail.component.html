@@ -63,7 +63,8 @@
                 <ul>
                   <li>
                     <!-- <a routerLink="/properties/1" class="side-btn"><i class="flaticon-share"></i></a> -->
-                    <a href="javascript:;" (click)="!csvLoading && onDownloadCSV()" class="side-btn" [ngClass]="{'is-loading': csvLoading}">
+                    <a href="javascript:;" (click)="!csvLoading && onDownloadCSV()" class="side-btn"
+                      [ngClass]="{'is-loading': csvLoading}">
                       <i class="fas fa-download" *ngIf="!csvLoading"></i>
                       <i class="fas fa-spinner fa-spin" *ngIf="csvLoading"></i>
                     </a>
@@ -165,7 +166,8 @@
                     <td>{{details.spaceType}}</td>
                     <td class="item-bold">How long will ad show per time?</td>
                     <td>
-                      <ng-container *ngIf="details.spaceType === 'Digital' && details.adShowPerTime; else noData">{{details.adShowPerTime}}</ng-container>
+                      <ng-container
+                        *ngIf="details.spaceType === 'Digital' && details.adShowPerTime; else noData">{{details.adShowPerTime}}</ng-container>
                     </td>
                   </tr>
                   <tr>
@@ -176,7 +178,8 @@
                   </tr>
                   <tr>
                     <td class="item-bold">Rent Price</td>
-                    <td>{{details.rentPrice | number:'1.2-2'}} <span class="table-price-suffix">({{details.rentPricePeriod}})</span></td>
+                    <td>{{details.rentPrice | number:'1.2-2'}} <span
+                        class="table-price-suffix">({{details.rentPricePeriod}})</span></td>
                     <td class="item-bold">Including print and install?</td>
                     <td>{{details.includePrintInstall ? 'Yes' : 'No'}}</td>
                   </tr>
@@ -185,7 +188,8 @@
                     <td>{{details.traffic ? 'Yes' : 'No'}}</td>
                     <td class="item-bold">How many viewers per day?</td>
                     <td>
-                      <ng-container *ngIf="details.traffic && details.viewersPerDay; else noData">{{details.viewersPerDay}}</ng-container>
+                      <ng-container
+                        *ngIf="details.traffic && details.viewersPerDay; else noData">{{details.viewersPerDay}}</ng-container>
                     </td>
                   </tr>
                   <ng-template #noData>-</ng-template>
@@ -195,29 +199,42 @@
           </div>
           <div class="col-lg-4 widget-break-lg sidebar-widget">
             <div class="widget widget-contact-box">
-              <h3 class="widget-subtitle">Contact</h3>
+              <h3 class="widget-subtitle">Book now</h3>
+              <div class="header-action-layout1">
+                <ul class="action-list">
+                  <li class="listing-button">
+                    <a (click)="goToBookingForm()" class="listing-btn">
+                      <span class="item-text">Book</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--
               <div class="media d-flex">
                 <!-- <div class="flex-shrink-0">
                   <div class="item-logo">
                     <img src="/assets/img/theme2.png" alt="logo" width="100" height="100" />
                   </div>
-                </div> -->
+                </div> 
                 <div class="media-body flex-grow-1">
                   <h4 class="item-title">{{details.sellerName}}</h4>
                   <div class="item-phn">
                     {{details.sellerNumber}}
                   </div>
                   <div class="item-mail">{{details.sellerEmail}}</div>
-                  <div class="item-mail"><b>Address:</b> <br/>{{details.sellerAddress}}</div>
+                  <div class="item-mail"><b>Address:</b> <br />{{details.sellerAddress}}</div>
                 </div>
               </div>
+            -->
             </div>
             <div class="widget widget-listing-box1 no-print" *ngIf="latestProperties?.length">
               <h3 class="widget-subtitle">Latest Listing</h3>
-              <div class="widget-listing" [ngClass]="{'no-brd': isLast}" *ngFor="let propValue of latestProperties; let isLast = last">
+              <div class="widget-listing" [ngClass]="{'no-brd': isLast}"
+                *ngFor="let propValue of latestProperties; let isLast = last">
                 <div class="item-img">
                   <a routerLink="/properties/{{propValue.id}}">
-                    <img [src]="backendurl + '/' + propValue.images[0].path" alt="widget" width="120" height="102" style="max-height: 102px;" />
+                    <img [src]="backendurl + '/' + propValue.images[0].path" alt="widget" width="120" height="102"
+                      style="max-height: 102px;" />
                   </a>
                 </div>
                 <div class="item-content">
@@ -227,7 +244,8 @@
                   <div class="location-area">
                     <i class="flaticon-maps-and-flags"></i>{{propValue.city?.name}}
                   </div>
-                  <div class="item-price">${{propValue.rentPrice | number: '1.2-2'}}<span style="margin-left: 5px;">{{propValue.rentPricePeriod}}</span></div>
+                  <div class="item-price">${{propValue.rentPrice | number: '1.2-2'}}<span
+                      style="margin-left: 5px;">{{propValue.rentPricePeriod}}</span></div>
                 </div>
               </div>
               <!-- <div class="widget-listing">
@@ -267,4 +285,3 @@
     </div>
   </div>
 </section>
-

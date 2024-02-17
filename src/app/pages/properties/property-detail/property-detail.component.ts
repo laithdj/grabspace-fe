@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Route } from '@angular/router';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { PropertyService } from '@pages/profile/services/property/property.service';
 import { backendurl } from 'src/environments/environment';
 import * as moment from 'moment';
@@ -24,6 +24,7 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
   constructor(
     private propertyService: PropertyService,
     private activateRoute: ActivatedRoute,
+    protected router: Router
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +39,9 @@ export class PropertyDetailComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     this.increasePropertyCount()
+  }
+  goToBookingForm() {
+    this.router.navigate(['/properties/' + this.id + '/booking-form'])
   }
   ngOnDestroy() {
     if (this.swiperSliderMain) {

@@ -57,11 +57,7 @@ export class BookingFormComponent implements OnInit {
   blockedTime: boolean;
 
   constructor(/*private auth:AuthService*/
-    private activatedRoute: ActivatedRoute,
-    private ngZone: NgZone,
-    private route: Router,
-    private datePipe: DatePipe,
-    private forBuilder: FormBuilder) { this.vendorsdata = 0, this.success = false, this.payment = true, this.offerservice = 0, this.time = [], this.daysDisabled = [], this.Times = [] }
+    private activatedRoute: ActivatedRoute) { this.vendorsdata = 0, this.success = false, this.payment = true, this.offerservice = 0, this.time = [], this.daysDisabled = [], this.Times = [] }
 
 
 
@@ -87,21 +83,7 @@ export class BookingFormComponent implements OnInit {
 
     }
 
-    this.bookingForm = this.forBuilder.group({
-      time: [null, [Validators.required]],
-      First_name: [null, [Validators.required]],
-      Last_name: [null, [Validators.required]],
-      Number: [null, [Validators.required]],
-      mail: [null, [Validators.required]],
-      REGO: [null],
-      Identity_no: [null],
-      payment_option: [null, [Validators.required]],
-      user_address: [null, [Validators.required]],
-      payment_card_name: [null],
-      payment_card_number: [null],
-      payment_card_expiration: [null],
-      payment_card_cvv: [null],
-    })
+
     // this.loggedUser = this.auth.getUser().value;
     this.invokeStripe();
   }
