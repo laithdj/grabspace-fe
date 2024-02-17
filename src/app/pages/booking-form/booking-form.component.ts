@@ -2,6 +2,10 @@ import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import * as CONSTANTS from 'src/app/core/constants';
+import { MessageService } from 'primeng/api';
+import { backendurl } from 'src/environments/environment';
+import { PropertyService } from '@pages/profile/services/property/property.service';
 
 @Component({
   selector: 'app-booking',
@@ -56,8 +60,22 @@ export class BookingFormComponent implements OnInit {
   dateArray: Date[];
   blockedTime: boolean;
 
+  submitted: boolean;
+  submitLoading: boolean;
+  uploadLoading: boolean;
+  errors: any = {};
+  ERROR_MESSAGES = CONSTANTS.ERROR_MESSAGES;
+  previewImages = [];
+  propertyImages = [];
+  selectedFile: File;
+
+
   constructor(/*private auth:AuthService*/
-    private activatedRoute: ActivatedRoute) { this.vendorsdata = 0, this.success = false, this.payment = true, this.offerservice = 0, this.time = [], this.daysDisabled = [], this.Times = [] }
+    private activatedRoute: ActivatedRoute,
+    private propertyService: PropertyService,
+    private router: Router,
+
+    private messageService: MessageService) { this.vendorsdata = 0, this.success = false, this.payment = true, this.offerservice = 0, this.time = [], this.daysDisabled = [], this.Times = [] }
 
 
 
@@ -366,6 +384,126 @@ export class BookingFormComponent implements OnInit {
   }
 
 
+  setupFormData() {
+    const existingImages = this.propertyService.getFormValue().images;
+    this.renderPreviousFiles(existingImages);
+  }
+  async renderPreviousFiles(existingImage) {
+    if (!Array.isArray(existingImage)) {
+      return;
+    }
+    if (existingImage.length <= 0) {
+      return;
+    }
+    if (this.propertyService.updateId) {
+      console.log('existingImage', existingImage);
+      for (const existingImageValue of existingImage) {
+        if (!existingImageValue._id) {
+          const filePushData = await this.getRenderFileData(existingImageValue);
+          this.previewImages.push({
+            id: filePushData.id,
+            image: filePushData.image
+          });
+          continue;
+        }
+        this.previewImages.push({
+          id: Date.now(),
+          image: `${backendurl}/${existingImageValue.path}`
+        });
+      }
+      this.propertyImages = existingImage;
+      return;
+    }
+    this.propertyImages = existingImage;
+    for (const existingImageValue of existingImage) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.previewImages.push({
+          id: existingImageValue.id,
+          image: e.target.result
+        });
+      };
+      reader.readAsDataURL(existingImageValue);
+    }
+
+  }
+  getRenderFileData(existingImageValue): Promise<{id: any, image: string }> {
+    return new Promise(resolve => {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        resolve({
+          id: existingImageValue.id,
+          image: e.target.result
+        });
+      };
+      reader.readAsDataURL(existingImageValue);
+    })
+  }
+  onChangeFile(event: any) {
+    if (event.target?.files?.length) {
+      this.selectedFile = event.target?.files[0];
+    } else {
+      this.selectedFile = null;
+    }
+
+  }
+  onUploadFile(): void {
+    console.log('onUploadFile called');
+    if (!this.selectedFile) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: `Please select file` });
+      return;
+    }
+    this.uploadLoading = true;
+    var fileExt = this.selectedFile.name.split('.').pop();
+    if (['jpg', 'jpeg', 'png'].indexOf(fileExt) <= -1) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: `Please upload only image file` });
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.previewImages.unshift({
+        id: Date.now(),
+        image: e.target.result
+      });
+      this.propertyImages.unshift(Object.assign(this.selectedFile, { id: Date.now() }));
+      setTimeout(() => {
+        this.uploadLoading = false;
+      }, 1000);
+    };
+    reader.readAsDataURL(this.selectedFile);
+  }
+  onRemoveImage(imageData: any, imageIndex: number) {
+    console.log('onRemoveImage called.', imageIndex);
+    this.previewImages.splice(imageIndex, 1);
+    this.propertyImages.splice(imageIndex, 1);
+  }
+  onSubmitImages() {
+    console.log('onSubmitImages called.');
+    if (this.propertyImages?.length <= 0) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: `Please select any one image to continue` });
+      return;
+    }
+    this.submitted = true;
+    this.submitLoading = true;
+    this.propertyService.setFormValue('IMAGES', this.propertyImages);
+    setTimeout(() => {
+      if (this.propertyService.updateId) {
+        this.router.navigateByUrl(`/profile/edit-listing/${this.propertyService.updateId}/seller-details`);
+        this.submitLoading = false;
+        return;
+      }
+      this.router.navigateByUrl(`/profile/add-listing/seller-details`);
+      this.submitLoading = false;
+    }, 1000);
+  }
+
+  onPreviousPage(): void {
+    if (this.propertyService.updateId) {
+      this.router.navigateByUrl(`/profile/edit-listing/${this.propertyService.updateId}/details`);
+      return;
+    }
+    this.router.navigateByUrl(`/profile/add-listing/details`);
+  }
 
 
 

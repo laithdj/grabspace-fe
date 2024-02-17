@@ -23,7 +23,8 @@ import { BookingFormComponent } from '@pages/booking-form/booking-form.component
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    ToastModule,
   ],
   providers: [MessageService]
 })
