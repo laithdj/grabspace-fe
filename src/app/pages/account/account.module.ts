@@ -7,13 +7,16 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { BookingFormComponent } from '@pages/booking-form/booking-form.component';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BookingFormComponent
+
   ],
   imports: [
     CommonModule,
